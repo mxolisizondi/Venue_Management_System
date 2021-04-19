@@ -17,6 +17,7 @@ namespace Venue_Management_System.Models
         public string Lastname { get; set; }
         public string CellNumber { get; set; }
         public string Email { get; set; }
+        public string Address { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
