@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +182,10 @@
     <Compile Include="Migrations\202104152013029_AddAddressToStudentModel.Designer.cs">
       <DependentUpon>202104152013029_AddAddressToStudentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104200106177_SeedUsers.cs" />
+    <Compile Include="Migrations\202104200106177_SeedUsers.Designer.cs">
+      <DependentUpon>202104200106177_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -191,6 +196,7 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Venue.cs" />
@@ -464,6 +470,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_AuthLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -488,6 +495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104152013029_AddAddressToStudentModel.resx">
       <DependentUpon>202104152013029_AddAddressToStudentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104200106177_SeedUsers.resx">
+      <DependentUpon>202104200106177_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
