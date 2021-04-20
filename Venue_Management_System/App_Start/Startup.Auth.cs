@@ -48,7 +48,7 @@ namespace Venue_Management_System
             //Uncomment the following lines to enable logging in with third party login providers
             app.UseMicrosoftAccountAuthentication(
                 clientId: "3d5b8337-9bc1-4bb4-b25d-05e0ae9de115",
-                clientSecret: "4c5273fb-f2b2-417f-abec-b2a9dc4ab924");
+                clientSecret: "3510e9be-d401-432a-80eb-9885e075231e");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
