@@ -13,5 +13,18 @@ namespace Venue_Management_System.Controllers
         {
             return View();
         }
+
+        // GET: Admin
+        public ActionResult Bookings()
+        {
+            return View();
+        }
+
+        //wwww.venuemagementsystem.co.za/Admin/VeiwStudentDetails
+        public ActionResult ViewStudentDetails()
+        {
+            //code to get all students from Database
+            return View();
+        }
     }
 }
