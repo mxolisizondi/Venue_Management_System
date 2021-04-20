@@ -79,6 +79,15 @@ namespace Venue_Management_System.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    var userRole = await UserManager.GetRolesAsync(user.Id);
+
+                    if (userRole.Contains(RoleName.Admin) && (returnUrl == null || returnUrl == "/"))
+                        return RedirectToAction("Index", "Admin");
+
+                    else if (userRole.Contains(RoleName.Student) && (returnUrl == null || returnUrl == "/"))
+                        return RedirectToAction("Home", "Student");
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
