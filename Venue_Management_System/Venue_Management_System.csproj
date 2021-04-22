@@ -187,6 +187,10 @@
     <Compile Include="Migrations\202104200106177_SeedUsers.Designer.cs">
       <DependentUpon>202104200106177_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104211702208_AddNavigationPropertyToVenueModel.cs" />
+    <Compile Include="Migrations\202104211702208_AddNavigationPropertyToVenueModel.Designer.cs">
+      <DependentUpon>202104211702208_AddNavigationPropertyToVenueModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\VenueViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin_Assets\assets\css\app-dark.min.css" />
@@ -572,6 +577,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104200106177_SeedUsers.resx">
       <DependentUpon>202104200106177_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104211702208_AddNavigationPropertyToVenueModel.resx">
+      <DependentUpon>202104211702208_AddNavigationPropertyToVenueModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
