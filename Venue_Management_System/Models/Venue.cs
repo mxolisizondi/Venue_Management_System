@@ -13,5 +13,10 @@ namespace Venue_Management_System.Models
         public int NumberOfSitsAllowed { get; set; }
         public int NumberOfSitsAvailable { get; set; }
 
+        // Venue on which campus
+
+        public VenueType VenueType { get; set; }
+        public int VenueTypeId { get; set; }
+
     }
 }
