@@ -9,14 +9,14 @@ namespace Venue_Management_System.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;//true update-database -verbose
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Venue_Management_System.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
     }
