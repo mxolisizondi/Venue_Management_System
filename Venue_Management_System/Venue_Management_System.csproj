@@ -191,6 +191,10 @@
     <Compile Include="Migrations\202104211702208_AddNavigationPropertyToVenueModel.Designer.cs">
       <DependentUpon>202104211702208_AddNavigationPropertyToVenueModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104232249492_AddCampusIdOnVenues.cs" />
+    <Compile Include="Migrations\202104232249492_AddCampusIdOnVenues.Designer.cs">
+      <DependentUpon>202104232249492_AddCampusIdOnVenues.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -550,6 +554,9 @@
     <Content Include="Student_Assets\fonts\Inter.var.woff2" />
     <Content Include="Student_Assets\js\app.js.LICENSE" />
     <Content Include="Student_Assets\js\app.js.map" />
+    <Content Include="Views\Admin\AddVenue.cshtml" />
+    <Content Include="Views\Admin\Venues.cshtml" />
+    <Content Include="Views\Admin\ViewStudentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -580,6 +587,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104211702208_AddNavigationPropertyToVenueModel.resx">
       <DependentUpon>202104211702208_AddNavigationPropertyToVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104232249492_AddCampusIdOnVenues.resx">
+      <DependentUpon>202104232249492_AddCampusIdOnVenues.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

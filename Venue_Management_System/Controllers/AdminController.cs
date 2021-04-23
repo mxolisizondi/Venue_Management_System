@@ -40,7 +40,9 @@ namespace Venue_Management_System.Controllers
         // GET: Admin
         public ActionResult Venues()
         {
-            var venues = _context.Venues.Include(v => v.VenueType).ToList();
+            var venues = _context.Venues.Include(v => v.VenueType)
+                                        .Include(c => c.Campus)
+                                        .ToList();
 
             return View(venues);
         }
@@ -48,13 +50,35 @@ namespace Venue_Management_System.Controllers
         public ActionResult AddVenue()
         {
             var venueTypes = _context.venueTypes.ToList();
+            var campuses = _context.Campuses.ToList();
             var venueViewModel = new VenueViewModel
             {
-                VenueTypes = venueTypes
+                VenueTypes = venueTypes,
+                Campuses = campuses
             };
             return View(venueViewModel);
         }
 
         //Venue on which campus
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddVenue(Venue venue)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new VenueViewModel
+                {
+                    Venue = venue,
+                    VenueTypes = _context.venueTypes.ToList(),
+                    Campuses = _context.Campuses.ToList()
+                };
+                return View(viewModel);
+            }
+            venue.NumberOfSitsAvailable = venue.NumberOfSitsAllowed;
+            _context.Venues.Add(venue);
+            _context.SaveChanges();
+            return RedirectToAction("AddVenue"); // Toast Status succeful changes and redirect to pending applications
+        }
     }
 }

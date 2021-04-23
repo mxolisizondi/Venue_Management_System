@@ -10,5 +10,6 @@ namespace Venue_Management_System.ViewModels
     {
         public Venue Venue { get; set; }
         public IEnumerable<VenueType> VenueTypes { get; set; }
+        public IEnumerable<Campus> Campuses { get; set; }
     }
 }
