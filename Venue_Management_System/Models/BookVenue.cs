@@ -22,4 +22,6 @@ namespace Venue_Management_System.Models
         public DateTime LeavingTime { get; set; }
 
     }
+    //book now
 }
+
