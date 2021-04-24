@@ -192,7 +192,23 @@ namespace Venue_Management_System.Migrations
                 .PrimaryKey(t => t.UseId)
                 .ForeignKey("dbo.AspNetUsers", t => t.UseId)
                 .Index(t => t.UseId);
-            
+
+
+            CreateTable(
+               "dbo.Events",
+               c => new
+               {
+                   Id = c.Int(nullable: false, identity: true),
+                   tittle = c.String(nullable: false, maxLength: 50),
+                   Desc = c.String(nullable: false, maxLength: 128),
+                   StartDate = c.DateTime(nullable: false),
+                   EndDate = c.DateTime(nullable: false),
+                   ThemeColor = c.String(nullable: false),
+                   IsFullDay = c.Boolean(nullable: false),
+
+               })
+               .PrimaryKey(t => t.Id);
+
             CreateTable(
                 "dbo.VenueTypes",
                 c => new
