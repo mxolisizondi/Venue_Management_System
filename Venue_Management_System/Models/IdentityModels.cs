@@ -31,6 +31,9 @@ namespace Venue_Management_System.Models
         public DbSet<Venue> Venues { get; set; }
         public DbSet<VenueType> venueTypes { get; set; }
         public DbSet<VenueStatus> VenueStatuses { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

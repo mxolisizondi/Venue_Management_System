@@ -208,6 +208,18 @@
     <Compile Include="Migrations\202104240119209_SeedDataToVenueStatus.Designer.cs">
       <DependentUpon>202104240119209_SeedDataToVenueStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104242101509_AddGroupModel.cs" />
+    <Compile Include="Migrations\202104242101509_AddGroupModel.Designer.cs">
+      <DependentUpon>202104242101509_AddGroupModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104242110467_AddGroupMemberModel.cs" />
+    <Compile Include="Migrations\202104242110467_AddGroupMemberModel.Designer.cs">
+      <DependentUpon>202104242110467_AddGroupMemberModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104242114365_AddEventModel.cs" />
+    <Compile Include="Migrations\202104242114365_AddEventModel.Designer.cs">
+      <DependentUpon>202104242114365_AddEventModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -216,6 +228,9 @@
     <Compile Include="Models\BorrowedStatus.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupMember.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleName.cs" />
@@ -620,6 +635,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104240119209_SeedDataToVenueStatus.resx">
       <DependentUpon>202104240119209_SeedDataToVenueStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104242101509_AddGroupModel.resx">
+      <DependentUpon>202104242101509_AddGroupModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104242110467_AddGroupMemberModel.resx">
+      <DependentUpon>202104242110467_AddGroupMemberModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104242114365_AddEventModel.resx">
+      <DependentUpon>202104242114365_AddEventModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
