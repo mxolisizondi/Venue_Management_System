@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Enum\VenueStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +196,18 @@
     <Compile Include="Migrations\202104232249492_AddCampusIdOnVenues.Designer.cs">
       <DependentUpon>202104232249492_AddCampusIdOnVenues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104240048538_AddVenueStatusTable.cs" />
+    <Compile Include="Migrations\202104240048538_AddVenueStatusTable.Designer.cs">
+      <DependentUpon>202104240048538_AddVenueStatusTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104240100016_AddVenueStatusToVenueModel.cs" />
+    <Compile Include="Migrations\202104240100016_AddVenueStatusToVenueModel.Designer.cs">
+      <DependentUpon>202104240100016_AddVenueStatusToVenueModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104240119209_SeedDataToVenueStatus.cs" />
+    <Compile Include="Migrations\202104240119209_SeedDataToVenueStatus.Designer.cs">
+      <DependentUpon>202104240119209_SeedDataToVenueStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -209,6 +222,7 @@
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Venue.cs" />
+    <Compile Include="Models\VenueStatus.cs" />
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -291,6 +305,7 @@
     <Content Include="Admin_Assets\assets\images\users\avatar-9.jpg" />
     <Content Include="Admin_Assets\assets\images\waves.png" />
     <Content Include="Admin_Assets\assets\js\app.min.js" />
+    <Content Include="Admin_Assets\assets\js\jquery.min.js" />
     <Content Include="Admin_Assets\assets\js\pages\demo.apex-area.js" />
     <Content Include="Admin_Assets\assets\js\pages\demo.apex-bar.js" />
     <Content Include="Admin_Assets\assets\js\pages\demo.apex-bubble.js" />
@@ -557,6 +572,12 @@
     <Content Include="Views\Admin\AddVenue.cshtml" />
     <Content Include="Views\Admin\Venues.cshtml" />
     <Content Include="Views\Admin\ViewStudentDetails.cshtml" />
+    <Content Include="Views\Admin\AddVenueType.cshtml" />
+    <Content Include="Views\Admin\AddCampus.cshtml" />
+    <Content Include="Views\Admin\RemoveVenue.cshtml" />
+    <Content Include="Views\Admin\UpdateVenueb.cshtml" />
+    <Content Include="Views\Admin\ViewVenue.cshtml" />
+    <Content Include="Views\Admin\UpdateVenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -590,6 +611,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104232249492_AddCampusIdOnVenues.resx">
       <DependentUpon>202104232249492_AddCampusIdOnVenues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104240048538_AddVenueStatusTable.resx">
+      <DependentUpon>202104240048538_AddVenueStatusTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104240100016_AddVenueStatusToVenueModel.resx">
+      <DependentUpon>202104240100016_AddVenueStatusToVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104240119209_SeedDataToVenueStatus.resx">
+      <DependentUpon>202104240119209_SeedDataToVenueStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

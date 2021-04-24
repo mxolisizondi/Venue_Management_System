@@ -1,0 +1,79 @@
+﻿@model IEnumerable < Venue_Management_System.Models.Venue>
+
+@{
+    ViewBag.Title = "RemoveVenue";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>RemoveVenue</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSitsAllowed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSitsAllowed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSitsAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSitsAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampusId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampusId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VenueTypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.venueStatusId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.venueStatusId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

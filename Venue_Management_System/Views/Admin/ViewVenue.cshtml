@@ -1,0 +1,77 @@
+﻿@model Venue_Management_System.Models.Venue
+
+@{
+    ViewBag.Title = "ViewVenue";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Venue Details</h4>
+                <div class="border-top">
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-6 text-right control-label col-form-label">Venue Name :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.Name</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-6 text-right control-label col-form-label">Total Sits :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.NumberOfSits</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-6 text-right control-label col-form-label">Sits Allowed :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.NumberOfSitsAllowed</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-6 text-right control-label col-form-label">Sits available for booking :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.NumberOfSitsAvailable</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-6 text-right control-label col-form-label">Campus :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.Campus.Name</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-6 text-right control-label col-form-label">Type of Venue :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.VenueType.TypeOfVenue</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-6 text-right control-label col-form-label">Status of the Venue :</label>
+                        <div class="col-sm-6">
+                            <label for="fname" class="text-right control-label col-form-label">@Model.venueStatus.Status</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-top card-body">
+                <a class="btn btn-primary" href="javascript:;" onclick="Back()">Back</a>
+            </div>
+
+            @using (Html.BeginForm("Venues", "Admin", FormMethod.Get))
+            {
+                <input type="submit" id="btnBack" value="No Action" style="display:none" />
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function Back() {
+            $("#btnBack").click();
+        };
+    </script>
+}

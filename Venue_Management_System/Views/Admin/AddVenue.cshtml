@@ -34,15 +34,14 @@
             @Html.DropDownListFor(m => m.Venue.CampusId, new SelectList(Model.Campuses, "Id", "Name"), "Select Campus", new { @class = "form-control" })
         </div>
         <div class="mb-3">
-            <a href="@Url.Action("AddVenue","Admin")" class="btn btn-danger mb-2" type="submit"><i class="mdi mdi-plus-circle me-2"></i> Add Venue</a>
+            @Html.LabelFor(m => m.Venue.venueStatusId, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Venue.venueStatusId, new SelectList(Model.VenueStatuses, "Id", "Status"), "Select Campus", new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
             <input type="submit" class="btn btn-danger mb-2" value=" Add Venue" />
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

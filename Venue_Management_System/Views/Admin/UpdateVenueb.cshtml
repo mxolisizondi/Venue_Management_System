@@ -1,8 +1,7 @@
-﻿@using Venue_Management_System.Enum
-@model IEnumerable<Venue_Management_System.Models.Venue>
+﻿@model IEnumerable<Venue_Management_System.Models.Venue>
 
 @{
-    ViewBag.Title = "AddVenue";
+    ViewBag.Title = "UpdateVenue";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -106,10 +105,7 @@ else
                                         <td>
                                             <a href="javascript:void(0);" class="action-icon" onclick="ViewVenue(@venue.Id)"> <i class="mdi mdi-eye"></i></a>
                                             <a href="javascript:void(0);" class="action-icon" onclick="UpdateVenue(@venue.Id)"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                            @if (venue.venueStatus.Id == VenueStatus.Active)
-                                            {
-                                                <a href="javascript:void(0);" class="action-icon" onclick="RemoveVenue(@venue.Id)" data-bs-toggle="modal" data-bs-target="#top-modal"> <i class="mdi mdi-delete"></i></a>
-                                            }
+                                            <a href="javascript:void(0);" class="action-icon" onclick="DeleteSchool(@venue.Id)" data-bs-toggle="modal" data-bs-target="#top-modal"> <i class="mdi mdi-delete"></i></a>
                                         </td>
                                     </tr>
                                 }
@@ -125,23 +121,21 @@ else
 @using (Html.BeginForm("ViewVenue", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" id="v_venueId" value="" name="id" />
+    <input type="hidden" id="fvenueId" value="" name="id" />
     <input type="submit" id="btnViewVenue" value="ViewVenue" style="display:none" />
 }
-
+@using (Html.BeginForm("UpdateVenue", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="fvenueId" value="" name="id" />
+    <input type="submit" id="btnDelete" onclick="console.log($('#fvenueId').val())" value="Delete" style="display:none" />
+}
 @using (Html.BeginForm("RemoveVenue", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <input type="hidden" id="fvenueId" value="" name="id" />
-    <input type="submit" id="btnDelete" value="Delete" style="display:none" />
+    <input type="submit" id="btnDelete" onclick="console.log($('#fvenueId').val())" value="Delete" style="display:none" />
 }
-@using (Html.BeginForm("UpdateVenue", "Admin", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
-    <input type="hidden" id="u_venueId" value="" name="id" />
-    <input type="submit" id="btnUpdateVenue" value="Update" style="display:none" />
-}
-
 <div id="top-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-top">
         <div class="modal-content">
@@ -156,7 +150,7 @@ else
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="SubmitRemoveVenueForm()">Yes</button>
+                <button type="button" class="btn btn-primary" onclick="SubmitDeleteForm()">Yes</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -166,29 +160,20 @@ else
 {
 
     <script>
+
         function ViewVenue(venueId) {
-            $("#v_venueId").val(venueId);
+            $("#fvenueId").val(venueId);
             SubmitViewVenueForm();
         };
-
         function SubmitViewVenueForm() {
             $("#btnViewVenue").click();
         };
 
-        function UpdateVenue(venueId) {
-            $("#u_venueId").val(venueId);
-            SubmitUpdateVenueForm();
-        };
-
-        function SubmitUpdateVenueForm() {
-            $("#btnUpdateVenue").click();
-        };
-
-        function RemoveVenue(venueId) {
+        function DeleteSchool(venueId) {
             console.log(venueId);
             $("#fvenueId").val(venueId);
         };
-        function SubmitRemoveVenueForm() {
+        function SubmitDeleteForm() {
             $("#btnDelete").click();
         };
 

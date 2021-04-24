@@ -30,6 +30,7 @@ namespace Venue_Management_System.Models
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Venue> Venues { get; set; }
         public DbSet<VenueType> venueTypes { get; set; }
+        public DbSet<VenueStatus> VenueStatuses { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

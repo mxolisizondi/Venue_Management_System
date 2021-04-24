@@ -19,5 +19,8 @@ namespace Venue_Management_System.Models
         public VenueType VenueType { get; set; }
         public int VenueTypeId { get; set; }
 
+        public VenueStatus venueStatus { get; set; }
+        public byte venueStatusId { get; set; }
+
     }
 }

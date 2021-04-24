@@ -9,7 +9,8 @@ namespace Venue_Management_System
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Admin_Assets/assets/js/app.min.js"));
 
  
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(

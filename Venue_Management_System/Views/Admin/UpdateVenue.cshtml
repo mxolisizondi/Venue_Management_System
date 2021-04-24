@@ -1,0 +1,70 @@
+﻿@model Venue_Management_System.ViewModels.VenueViewModel
+
+@{
+    ViewBag.Title = "UpdateVenue";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Venue.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Venue.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Venue.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Venue.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Venue.NumberOfSits, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Venue.NumberOfSits, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Venue.NumberOfSits, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Venue.NumberOfSitsAllowed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Venue.NumberOfSitsAllowed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Venue.NumberOfSitsAllowed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Venue.NumberOfSitsAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Venue.NumberOfSitsAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Venue.NumberOfSitsAvailable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Venue.VenueTypeId, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Venue.VenueTypeId, new SelectList(Model.VenueTypes, "Id", "TypeOfVenue"), "Select type of venue", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Venue.CampusId, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Venue.CampusId, new SelectList(Model.Campuses, "Id", "Name"), "Select Campus", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Venue.venueStatusId, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Venue.venueStatusId, new SelectList(Model.VenueStatuses, "Id", "Status"), "Select status", new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            
+        </div>
+        <div class="mb-3">
+            <a class="btn btn-primary" href="javascript:;" onclick="Back()">Back</a>
+            <input type="submit" class="btn btn-danger" value="Update Venue" />
+        </div>
+    </div>
+}

@@ -1,0 +1,24 @@
+﻿@model Venue_Management_System.Models.VenueType
+
+@{
+    ViewBag.Title = "AddVenueType";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AddVenueType</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="mb-3">
+            @Html.LabelFor(m => m.TypeOfVenue, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.TypeOfVenue, new { @class = "form-control", @placeholder = "Enter the name of the venue" })
+        </div>
+        <div class="mb-3">
+            <input type="submit" class="btn btn-danger mb-2" value=" Add Venue Type" />
+        </div>
+    </div>
+}
