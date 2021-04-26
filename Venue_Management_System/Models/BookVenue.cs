@@ -10,7 +10,7 @@ namespace Venue_Management_System.Models
         public int Id { get; set; }
 
         public Student Student { get; set; }
-        public long StudentNumber { get; set; }
+        public string UserId { get; set; }
 
         public Venue Venue { get; set; }
         public int VenueId { get; set; }

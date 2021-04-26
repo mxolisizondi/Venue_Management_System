@@ -7,13 +7,13 @@ namespace Venue_Management_System.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddGroupModel : IMigrationMetadata
+    public sealed partial class RemoveUserIdOnGroup : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddGroupModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveUserIdOnGroup));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104242101509_AddGroupModel"; }
+            get { return "202104242357145_RemoveUserIdOnGroup"; }
         }
         
         string IMigrationMetadata.Source

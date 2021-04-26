@@ -15,7 +15,7 @@ namespace Venue_Management_System.Models
         public string Color { get; set; }
         public byte IsFull { get; set; }
         public Student Student { get; set; }
-        public long StudentNumber { get; set; }
+        public string UserId { get; set; }
 
     }
 }

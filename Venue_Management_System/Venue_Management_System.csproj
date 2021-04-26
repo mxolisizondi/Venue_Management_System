@@ -208,10 +208,6 @@
     <Compile Include="Migrations\202104240119209_SeedDataToVenueStatus.Designer.cs">
       <DependentUpon>202104240119209_SeedDataToVenueStatus.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104242101509_AddGroupModel.cs" />
-    <Compile Include="Migrations\202104242101509_AddGroupModel.Designer.cs">
-      <DependentUpon>202104242101509_AddGroupModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202104242110467_AddGroupMemberModel.cs" />
     <Compile Include="Migrations\202104242110467_AddGroupMemberModel.Designer.cs">
       <DependentUpon>202104242110467_AddGroupMemberModel.cs</DependentUpon>
@@ -219,6 +215,42 @@
     <Compile Include="Migrations\202104242114365_AddEventModel.cs" />
     <Compile Include="Migrations\202104242114365_AddEventModel.Designer.cs">
       <DependentUpon>202104242114365_AddEventModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104242357145_RemoveUserIdOnGroup.cs" />
+    <Compile Include="Migrations\202104242357145_RemoveUserIdOnGroup.Designer.cs">
+      <DependentUpon>202104242357145_RemoveUserIdOnGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104250001199_MakeIdIntToGroupModelAndGroupMember.cs" />
+    <Compile Include="Migrations\202104250001199_MakeIdIntToGroupModelAndGroupMember.Designer.cs">
+      <DependentUpon>202104250001199_MakeIdIntToGroupModelAndGroupMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104250016260_AddGroupModel.cs" />
+    <Compile Include="Migrations\202104250016260_AddGroupModel.Designer.cs">
+      <DependentUpon>202104250016260_AddGroupModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104250025296_AddGroupModelBackToDB.cs" />
+    <Compile Include="Migrations\202104250025296_AddGroupModelBackToDB.Designer.cs">
+      <DependentUpon>202104250025296_AddGroupModelBackToDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104250048003_RemoveGroupAnGroupMember.cs" />
+    <Compile Include="Migrations\202104250048003_RemoveGroupAnGroupMember.Designer.cs">
+      <DependentUpon>202104250048003_RemoveGroupAnGroupMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104250051256_AddGroupAndGroupMemberModel.cs" />
+    <Compile Include="Migrations\202104250051256_AddGroupAndGroupMemberModel.Designer.cs">
+      <DependentUpon>202104250051256_AddGroupAndGroupMemberModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104251722200_AddGroupMemberIdToGroupModel.cs" />
+    <Compile Include="Migrations\202104251722200_AddGroupMemberIdToGroupModel.Designer.cs">
+      <DependentUpon>202104251722200_AddGroupMemberIdToGroupModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104251814594_CreateNewRelationShipsToGroupMemberAndGroup.cs" />
+    <Compile Include="Migrations\202104251814594_CreateNewRelationShipsToGroupMemberAndGroup.Designer.cs">
+      <DependentUpon>202104251814594_CreateNewRelationShipsToGroupMemberAndGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104251819193_DropRelationshipOnGroup.cs" />
+    <Compile Include="Migrations\202104251819193_DropRelationshipOnGroup.Designer.cs">
+      <DependentUpon>202104251819193_DropRelationshipOnGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -228,6 +260,7 @@
     <Compile Include="Models\BorrowedStatus.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\DistinctItemComparer.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\GroupMember.cs" />
@@ -241,6 +274,7 @@
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\VenueViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -593,6 +627,9 @@
     <Content Include="Views\Admin\UpdateVenueb.cshtml" />
     <Content Include="Views\Admin\ViewVenue.cshtml" />
     <Content Include="Views\Admin\UpdateVenue.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout_H.cshtml" />
+    <Content Include="Views\Student\CreateGroup.cshtml" />
+    <Content Include="Views\Student\MyGroups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -636,14 +673,38 @@
     <EmbeddedResource Include="Migrations\202104240119209_SeedDataToVenueStatus.resx">
       <DependentUpon>202104240119209_SeedDataToVenueStatus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104242101509_AddGroupModel.resx">
-      <DependentUpon>202104242101509_AddGroupModel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104242110467_AddGroupMemberModel.resx">
       <DependentUpon>202104242110467_AddGroupMemberModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104242114365_AddEventModel.resx">
       <DependentUpon>202104242114365_AddEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104242357145_RemoveUserIdOnGroup.resx">
+      <DependentUpon>202104242357145_RemoveUserIdOnGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104250001199_MakeIdIntToGroupModelAndGroupMember.resx">
+      <DependentUpon>202104250001199_MakeIdIntToGroupModelAndGroupMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104250016260_AddGroupModel.resx">
+      <DependentUpon>202104250016260_AddGroupModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104250025296_AddGroupModelBackToDB.resx">
+      <DependentUpon>202104250025296_AddGroupModelBackToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104250048003_RemoveGroupAnGroupMember.resx">
+      <DependentUpon>202104250048003_RemoveGroupAnGroupMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104250051256_AddGroupAndGroupMemberModel.resx">
+      <DependentUpon>202104250051256_AddGroupAndGroupMemberModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104251722200_AddGroupMemberIdToGroupModel.resx">
+      <DependentUpon>202104251722200_AddGroupMemberIdToGroupModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104251814594_CreateNewRelationShipsToGroupMemberAndGroup.resx">
+      <DependentUpon>202104251814594_CreateNewRelationShipsToGroupMemberAndGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104251819193_DropRelationshipOnGroup.resx">
+      <DependentUpon>202104251819193_DropRelationshipOnGroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

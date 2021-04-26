@@ -7,9 +7,13 @@ namespace Venue_Management_System.Models
 {
     public class GroupMember
     {
-        public byte Id { get; set; }
-        public long StudentNumber { get; set; }
+        public int Id { get; set; }
+
         public Group Group { get; set; }
-        public byte GroupId { get; set; }
+        public int GroupId { get; set; }
+
+        public Student Student { get; set; }
+        public string UserId { get; set; }
+
     }
 }

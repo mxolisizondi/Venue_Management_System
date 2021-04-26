@@ -10,7 +10,7 @@ namespace Venue_Management_System.Models
     public class Student
     {
         [Key, ForeignKey("ApplicationUser")]
-        public string UseId { get; set; }
+        public string UserId { get; set; }
 
         public long StudentNumber { get; set; }
         public string Firstname { get; set; }

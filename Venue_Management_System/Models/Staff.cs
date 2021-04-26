@@ -10,7 +10,7 @@ namespace Venue_Management_System.Models
     public class Staff
     {
         [Key, ForeignKey("ApplicationUser")]
-        public string UseId { get; set; }
+        public string UserId { get; set; }
 
         public long StaffNumber { get; set; }
         public string Firstname { get; set; }
