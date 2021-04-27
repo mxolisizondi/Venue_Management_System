@@ -8,7 +8,8 @@ namespace Venue_Management_System.ViewModels
 {
     public class GroupViewModel
     {
+        public Student Student { get; set; }
+        public GroupMember GroupMembers { get; set; }
         public IEnumerable<Group> Groups { get; set; }
-        public IEnumerable<GroupMember> GroupMembers { get; set; }
     }
 }
