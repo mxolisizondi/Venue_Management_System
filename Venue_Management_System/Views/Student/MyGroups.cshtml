@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Venue_Management_System.Models.Group>
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<Venue_Management_System.Models.Group>
 
 @{
     ViewBag.Title = "MyGroups";
@@ -91,21 +92,18 @@ else
                                             }
                                         </td>
                                         <td>
-                                            @foreach (var member in group.GroupMembers)
+                                            @if (@group.UserId == User.Identity.GetUserId())
                                             {
-                                                if (@group.UserId == @member.UserId)
-                                                {
-                                                    <a href="javascript:void(0);" class="action-icon" onclick="ViewVenue()"> <i class="mdi mdi-eye"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon" onclick="UpdateVenue()"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon" onclick="RemoveVenue()" data-bs-toggle="modal" data-bs-target="#top-modal"> <i class="mdi mdi-delete"></i></a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="javascript:void(0);" class="action-icon" onclick="ViewVenue()">--</a>
-                                                    <a href="javascript:void(0);" class="action-icon" onclick="ViewVenue()"><i class="mdi mdi-eye"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon" onclick="ViewVenue()">--</a>
+                                                <a href="javascript:void(0);" class="action-icon" onclick="ViewGroup(@group.Id)"> <i class="mdi mdi-eye"></i></a>
+                                                <a href="javascript:void(0);" class="action-icon" onclick="UpdateVenue()"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                                <a href="javascript:void(0);" class="action-icon" onclick="RemoveVenue()" data-bs-toggle="modal" data-bs-target="#top-modal"> <i class="mdi mdi-delete"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="javascript:void(0);" class="action-icon">--</a>
+                                                <a href="javascript:void(0);" class="action-icon" onclick="ViewGroup(@group.Id)"><i class="mdi mdi-eye"></i></a>
+                                                <a href="javascript:void(0);" class="action-icon">--</a>
 
-                                                }
                                             }
                                         </td>
                                     </tr>
@@ -118,4 +116,75 @@ else
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+}
+@using (Html.BeginForm("ViewGroupDetails", "Student", FormMethod.Get))
+{
+    <input type="hidden" id="g_Id" value="" name="id" />
+    <input type="submit" id="btnViewGroupDetails" value="ViewGroup" style="display:none" />
+}
+
+@using (Html.BeginForm("RemoveVenue", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="fvenueId" value="" name="id" />
+    <input type="submit" id="btnDelete" value="Delete" style="display:none" />
+}
+@using (Html.BeginForm("UpdateVenue", "Admin", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="u_venueId" value="" name="id" />
+    <input type="submit" id="btnUpdateVenue" value="Update" style="display:none" />
+}
+
+<div id="top-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">Alert</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate this venue??</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="SubmitRemoveVenueForm()">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+@section scripts
+{
+
+    <script>
+        function ViewGroup(groupId) {
+            $("#g_Id").val(groupId);
+            SubmitViewGroupDetailsForm();
+        };
+
+        function SubmitViewGroupDetailsForm() {
+            $("#btnViewGroupDetails").click();
+        };
+
+        function UpdateVenue(venueId) {
+            $("#u_venueId").val(venueId);
+            SubmitUpdateVenueForm();
+        };
+
+        function SubmitUpdateVenueForm() {
+            $("#btnUpdateVenue").click();
+        };
+
+        function RemoveVenue(venueId) {
+            console.log(venueId);
+            $("#fvenueId").val(venueId);
+        };
+        function SubmitRemoveVenueForm() {
+            $("#btnDelete").click();
+        };
+
+    </script>
 }

@@ -278,7 +278,6 @@
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\GroupMemberViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\VenueViewModel.cs" />
   </ItemGroup>
@@ -637,6 +636,7 @@
     <Content Include="Views\Student\MyGroups.cshtml" />
     <Content Include="Views\Student\AddMembers.cshtml" />
     <Content Include="Views\Student\GetEvents.cshtml" />
+    <Content Include="Views\Student\ViewGroupDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

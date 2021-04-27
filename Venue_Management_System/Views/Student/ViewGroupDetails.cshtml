@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Venue_Management_System.Models.Group>
+
+@{
+    ViewBag.Title = "ViewGroupDetails";
+    Layout = "~/Views/Shared/_StudentLayout_H.cshtml";
+}
+@if (!Model.Any())
+{
+    <p>You dont have any group</p>
+}
+else
+{
+
+<div class="row">
+    @foreach (var group in Model)
+    {
+        <h4>Group Name : @group.Name</h4>
+        foreach (var member in group.GroupMembers)
+        {
+            <div class="col-md-4">
+                <div class="card border-secondary border">
+                    <h5 class="card-header">@(member.Student.Firstname + " " + member.Student.Lastname)</h5>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong><i class='uil uil-document'></i> Student Number:</strong> : @member.Student.StudentNumber<br />
+                            <strong><i class='uil uil-phone'></i> Phone Number:</strong> : @member.Student.CellNumber<br />
+                            <strong><i class='uil uil-envelope'></i> Email:</strong>  : @member.Student.Email<br />
+                        </p>
+                    </div>
+
+                    <!-- end card-body-->
+                </div> <!-- end card-->
+            </div> <!-- end col-->
+        }
+    }
+</div>
+<a href="javascript: void(0);" class="btn btn-secondary btn-sm">Back</a>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function Back() {
+            $("#btnBack").click();
+        };
+    </script>
+}

@@ -31,7 +31,6 @@ namespace Venue_Management_System.Controllers
             var listOfMyGroupsId = _context.GroupMembers.Where(s => s.UserId == userId).ToList();
             var distinctMyGroupId = listOfMyGroupsId.Distinct(new DistinctItemComparer()).ToList();
             var onlyId = distinctMyGroupId.Where(s => s.UserId == userId).Select(g => g.GroupId).ToList();
-            var groupMember = _context.GroupMembers.Include(s => s.Student).Include(m => m.Group).Where(g => onlyId.Contains(g.GroupId)).ToList();
             var myGroup = _context.Groups.Include(s => s.Student).Include(m => m.GroupMembers).Where(g => onlyId.Contains(g.Id)).ToList();
 
             return View(myGroup);
@@ -125,6 +124,27 @@ namespace Venue_Management_System.Controllers
         {
             var events = _context.Events.ToList();
             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public ActionResult ViewGroupDetails(int? id)
+        {
+            var myGroup = _context.Groups.Include(s => s.Student)
+                                         .Include(m => m.GroupMembers)
+                                         .Where(g => g.Id == id).ToList();
+
+            for(int i = 0; i < myGroup.Count; i++)
+            {
+                
+                foreach(var member in myGroup[i].GroupMembers)
+                {
+                    var student = _context.Students.First(s => s.UserId == member.UserId);
+
+                    member.Student = student;
+                }
+            }
+            
+
+            return View(myGroup);
         }
 
 
