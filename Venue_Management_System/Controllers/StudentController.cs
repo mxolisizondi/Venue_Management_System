@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using Venue_Management_System.Models;
 using Venue_Management_System.ViewModels;
+using VenueStatus = Venue_Management_System.Enum.VenueStatus;
 
 namespace Venue_Management_System.Controllers
 {
@@ -32,6 +33,17 @@ namespace Venue_Management_System.Controllers
             var distinctMyGroupId = listOfMyGroupsId.Distinct(new DistinctItemComparer()).ToList();
             var onlyId = distinctMyGroupId.Where(s => s.UserId == userId).Select(g => g.GroupId).ToList();
             var myGroup = _context.Groups.Include(s => s.Student).Include(m => m.GroupMembers).Where(g => onlyId.Contains(g.Id)).ToList();
+
+            for (int i = 0; i < myGroup.Count; i++)
+            {
+
+                foreach (var member in myGroup[i].GroupMembers)
+                {
+                    var student = _context.Students.First(s => s.UserId == member.UserId);
+
+                    member.Student = student;
+                }
+            }
 
             return View(myGroup);
         }
@@ -147,6 +159,39 @@ namespace Venue_Management_System.Controllers
             return View(myGroup);
         }
 
+        public ActionResult BookVenue()
+        {
+            //use userId to start displaying lab that are in his or her department
+            // check on time if user already left
+            var venues = _context.Venues.Include(v => v.VenueType)
+                                        .Include(c => c.Campus)
+                                        .Where(s => s.venueStatusId == VenueStatus.Active &&
+                                               s.NumberOfSitsAvailable > 0)
+                                        .ToList();
+            return View(venues);
+        }
+
+        public ActionResult BookSpace(int? id)
+        {
+            var venueToBook = _context.Venues.FirstOrDefault(v => v.Id == id);
+            var userId = User.Identity.GetUserId();
+            //check if the lab is active and have available space
+
+            if (venueToBook == null)
+                return HttpNotFound();
+
+            //List of group, Venue, User, Date
+            var student = _context.Students.FirstOrDefault(s => s.UserId == userId);
+            var ownerGroups = _context.Groups.Include(m => m.GroupMembers).Where(s => s.UserId == userId).ToList();
+            var veiwModel = new BookVenueViewModel
+            {
+                Venue = venueToBook,
+                Student = student,
+                Groups = ownerGroups
+            };
+            
+            return View(veiwModel);
+        }
 
     }
 }

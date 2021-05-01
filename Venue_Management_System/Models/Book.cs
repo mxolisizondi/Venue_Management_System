@@ -13,5 +13,8 @@ namespace Venue_Management_System.Models
         public DateTime DatePublished { get; set; }
         public int TotalBooks { get; set; }
         public int TotalBooksAvailable { get; set; }
+        
+        public BookStatus BookStatus { get; set; }
+        public byte BookStatusId { get; set; }
     }
 }

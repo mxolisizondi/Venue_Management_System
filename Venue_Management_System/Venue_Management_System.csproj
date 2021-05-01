@@ -169,9 +169,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Enum\BookStatus.cs" />
     <Compile Include="Enum\VenueStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,9 +258,27 @@
     <Compile Include="Migrations\202104262048464_AddListToStudentModel.Designer.cs">
       <DependentUpon>202104262048464_AddListToStudentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105011259427_AddSyaModels.cs" />
+    <Compile Include="Migrations\202105011259427_AddSyaModels.Designer.cs">
+      <DependentUpon>202105011259427_AddSyaModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105011547329_DropBookStatus.cs" />
+    <Compile Include="Migrations\202105011547329_DropBookStatus.Designer.cs">
+      <DependentUpon>202105011547329_DropBookStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105011552376_AddBookStatudModel.cs" />
+    <Compile Include="Migrations\202105011552376_AddBookStatudModel.Designer.cs">
+      <DependentUpon>202105011552376_AddBookStatudModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105011556334_PopulateBookStatus.cs" />
+    <Compile Include="Migrations\202105011556334_PopulateBookStatus.Designer.cs">
+      <DependentUpon>202105011556334_PopulateBookStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BookCategory.cs" />
+    <Compile Include="Models\BookStatus.cs" />
     <Compile Include="Models\BookVenue.cs" />
     <Compile Include="Models\BorrowedBook.cs" />
     <Compile Include="Models\BorrowedStatus.cs" />
@@ -273,11 +293,16 @@
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Syah_Models\Book_Sya.cs" />
+    <Compile Include="Models\Syah_Models\BorrowedStatus_Sya.cs" />
+    <Compile Include="Models\Syah_Models\BorrowHistory.cs" />
     <Compile Include="Models\Venue.cs" />
     <Compile Include="Models\VenueStatus.cs" />
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BookVenueViewModel.cs" />
+    <Compile Include="ViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\VenueViewModel.cs" />
   </ItemGroup>
@@ -637,6 +662,18 @@
     <Content Include="Views\Student\AddMembers.cshtml" />
     <Content Include="Views\Student\GetEvents.cshtml" />
     <Content Include="Views\Student\ViewGroupDetails.cshtml" />
+    <Content Include="Views\Student\BookVenue.cshtml" />
+    <Content Include="Views\Student\BookSpace.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Admin\CreateBook.cshtml" />
+    <Content Include="Views\Admin\GetAllBooks.cshtml" />
+    <Content Include="Views\Admin\UpdateBook.cshtml" />
+    <Content Include="Views\Admin\GetInActiveBooks.cshtml" />
+    <Content Include="Views\Admin\ViewBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -715,6 +752,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104262048464_AddListToStudentModel.resx">
       <DependentUpon>202104262048464_AddListToStudentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011259427_AddSyaModels.resx">
+      <DependentUpon>202105011259427_AddSyaModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011547329_DropBookStatus.resx">
+      <DependentUpon>202105011547329_DropBookStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011552376_AddBookStatudModel.resx">
+      <DependentUpon>202105011552376_AddBookStatudModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011556334_PopulateBookStatus.resx">
+      <DependentUpon>202105011556334_PopulateBookStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
