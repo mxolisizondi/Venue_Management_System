@@ -56,11 +56,13 @@ namespace Venue_Management_System.Controllers
             var venueTypes = _context.venueTypes.ToList();
             var campuses = _context.Campuses.ToList();
             var venueStatuses = _context.VenueStatuses.ToList();
+            var departments = _context.Departments.ToList();
             var venueViewModel = new VenueViewModel
             {
                 VenueTypes = venueTypes,
                 Campuses = campuses,
-                VenueStatuses = venueStatuses
+                VenueStatuses = venueStatuses,
+                Departments = departments
 
             };
             return View(venueViewModel);
@@ -79,7 +81,8 @@ namespace Venue_Management_System.Controllers
                     Venue = venue,
                     VenueTypes = _context.venueTypes.ToList(),
                     Campuses = _context.Campuses.ToList(),
-                    VenueStatuses = _context.VenueStatuses.ToList()
+                    VenueStatuses = _context.VenueStatuses.ToList(),
+                    Departments = _context.Departments.ToList()
                 };
                 return View(viewModel);
             }

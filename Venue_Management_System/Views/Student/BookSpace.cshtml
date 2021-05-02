@@ -11,21 +11,25 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            <div class="col-md-10">
+                <div class="form-check form-switch">
+                   @Html.RadioButton("BookVenueCategory", "Individual", new { @class = "form-check-input" })
+                    <label class="form-check-label" for="customSwitch1">Individual </label>
                 </div>
-            </div>*@
-        <div class="form-check form-switch">
-            <input type="checkbox" class="form-check-input" id="customSwitch1" name="individual">
-            <label class="form-check-label" for="customSwitch1">Group Group</label>
+            </div>
         </div>
         <div class="form-group">
             <div class="col-md-10">
                 <div class="form-check form-switch">
-                    <input type="checkbox" class="form-check-input" id="customSwitch1">
-                    <label class="form-check-label" for="customSwitch1">Individual </label>
+                    @Html.RadioButton("BookVenueCategory", "Group", new { @class = "form-check-input" })
+                    <label class="form-check-label" for="customSwitch1">Group </label>
                 </div>
             </div>
         </div>
@@ -69,9 +73,9 @@
     <script>
         $(document).ready(function () {
             $('#selectGroup').hide();
-            $('input[name=individual]').click(function () {
-                console.log($('input[name=individual]:checked').val());
-                if ($('input[name=individual]:checked').val() === "on") {
+            $('input[name=BookVenueCategory]').click(function () {
+                console.log($('input[name=BookVenueCategory]:checked').val());
+                if ($('input[name=BookVenueCategory]:checked').val() === "Group") {
                     $('#selectGroup').show();
                 } else {
                     $('#selectGroup').hide();

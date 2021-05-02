@@ -1,14 +1,13 @@
-﻿@using Venue_Management_System.Enum
-@model IEnumerable<Venue_Management_System.Models.Venue>
-
+﻿
+@model IEnumerable<Venue_Management_System.Models.Book>
 @{
-    ViewBag.Title = "AddVenue";
+    ViewBag.Title = "GetAllBooks";
     Layout = "~/Views/Shared/_StudentLayout_H.cshtml";
 }
 
 @if (!Model.Any())
 {
-    <p>There are no venues please to book</p>
+    <p>There are no book please add books</p>
 }
 else
 {
@@ -55,15 +54,15 @@ else
                                             <label class="form-check-label" for="customCheck1">&nbsp;</label>
                                         </div>
                                     </th>
-                                    <th>Venue Name</th>
-                                    <th>Number of Sits Available</th>
-                                    <th>Venue Type</th>
-                                    <th>Campus</th>
+                                    <th>Book Name</th>
+                                    <th>Author</th>
+                                    <th>Date Published</th>
+                                    <th>Borrowed Books</th>
                                     <th style="width: 125px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var venue in Model)
+                                @foreach (var book in Model)
                                 {
                                     <tr>
                                         <td>
@@ -73,19 +72,21 @@ else
                                             </div>
                                         </td>
                                         <td>
-                                            @venue.Name
+                                            @book.Name
                                         </td>
                                         <td>
-                                            @venue.NumberOfSitsAvailable
+                                            @book.Author
                                         </td>
                                         <td>
-                                            @venue.VenueType.TypeOfVenue
+                                            @book.DatePublished
                                         </td>
                                         <td>
-                                            @venue.Campus.Name
+                                            @book.TotalBooksAvailable
                                         </td>
                                         <td>
-                                            <a type="button" class="btn btn-danger mb-2" href="@Url.Action("BookSpace","Student", new { id = venue.Id})">Book Venue</a>
+                                            <div class="text-lg-end">
+                                                <a type="button" class="btn btn-danger mb-2 me-2" href="@Url.Action("BorrowBook","Student",new { id = book.Id })">Borrow</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -97,4 +98,75 @@ else
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+}
+@using (Html.BeginForm("ViewBook", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="v_bookId" value="" name="id" />
+    <input type="submit" id="btnViewBook" value="ViewVenue" style="display:none" />
+}
+
+@using (Html.BeginForm("DeleteBook", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="d_bookId" value="" name="id" />
+    <input type="submit" id="btnDeleteBook" value="Delete" style="display:none" />
+}
+@using (Html.BeginForm("UpdateBook", "Admin", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="u_bookId" value="" name="id" />
+    <input type="submit" id="btnUpdateBook" value="Update" style="display:none" />
+}
+
+<div id="top-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">Alert</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this book??</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="SubmitDeleteForm()">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+@section scripts
+{
+
+    <script>
+        function ViewBook(bookId) {
+            $("#v_bookId").val(bookId);
+            SubmitViewBookForm();
+        };
+
+        function SubmitViewBookForm() {
+            $("#btnViewBook").click();
+        };
+
+        function UpdateBook(bookId) {
+            $("#u_bookId").val(bookId);
+            SubmitUpdateBookForm();
+        };
+
+        function SubmitUpdateBookForm() {
+            $("#btnUpdateBook").click();
+        };
+
+        function DeleteBook(bookId) {
+            $("#d_bookId").val(bookId);
+        };
+        function SubmitDeleteForm() {
+            $("#btnDeleteBook").click();
+        };
+
+    </script>
 }

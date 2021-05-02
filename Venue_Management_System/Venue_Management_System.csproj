@@ -274,12 +274,33 @@
     <Compile Include="Migrations\202105011556334_PopulateBookStatus.Designer.cs">
       <DependentUpon>202105011556334_PopulateBookStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105012355370_AddBookIdToBorrowedBooks.cs" />
+    <Compile Include="Migrations\202105012355370_AddBookIdToBorrowedBooks.Designer.cs">
+      <DependentUpon>202105012355370_AddBookIdToBorrowedBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105020017219_RemoveBorrowedStatusOnModel.cs" />
+    <Compile Include="Migrations\202105020017219_RemoveBorrowedStatusOnModel.Designer.cs">
+      <DependentUpon>202105020017219_RemoveBorrowedStatusOnModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105021346235_AddDepartmentIDToVenueModel.cs" />
+    <Compile Include="Migrations\202105021346235_AddDepartmentIDToVenueModel.Designer.cs">
+      <DependentUpon>202105021346235_AddDepartmentIDToVenueModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105021406573_AddDepartmentIdToStudentModel.cs" />
+    <Compile Include="Migrations\202105021406573_AddDepartmentIdToStudentModel.Designer.cs">
+      <DependentUpon>202105021406573_AddDepartmentIdToStudentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.cs" />
+    <Compile Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.Designer.cs">
+      <DependentUpon>202105021443419_AddBookCategoryInBookVenueModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookCategory.cs" />
     <Compile Include="Models\BookStatus.cs" />
     <Compile Include="Models\BookVenue.cs" />
+    <Compile Include="Models\BookVenueCategory.cs" />
     <Compile Include="Models\BorrowedBook.cs" />
     <Compile Include="Models\BorrowedStatus.cs" />
     <Compile Include="Models\Campus.cs" />
@@ -674,6 +695,8 @@
     <Content Include="Views\Admin\UpdateBook.cshtml" />
     <Content Include="Views\Admin\GetInActiveBooks.cshtml" />
     <Content Include="Views\Admin\ViewBook.cshtml" />
+    <Content Include="Views\Student\Books.cshtml" />
+    <Content Include="Views\Student\BorrowBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -764,6 +787,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105011556334_PopulateBookStatus.resx">
       <DependentUpon>202105011556334_PopulateBookStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105012355370_AddBookIdToBorrowedBooks.resx">
+      <DependentUpon>202105012355370_AddBookIdToBorrowedBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105020017219_RemoveBorrowedStatusOnModel.resx">
+      <DependentUpon>202105020017219_RemoveBorrowedStatusOnModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021346235_AddDepartmentIDToVenueModel.resx">
+      <DependentUpon>202105021346235_AddDepartmentIDToVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021406573_AddDepartmentIdToStudentModel.resx">
+      <DependentUpon>202105021406573_AddDepartmentIdToStudentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.resx">
+      <DependentUpon>202105021443419_AddBookCategoryInBookVenueModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
