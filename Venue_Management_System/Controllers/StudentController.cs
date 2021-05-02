@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using Venue_Management_System.Models;
 using Venue_Management_System.ViewModels;
+using System.Web.UI.WebControls;
 
 namespace Venue_Management_System.Controllers
 {
@@ -125,6 +126,55 @@ namespace Venue_Management_System.Controllers
             var events = _context.Events.ToList();
             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        /*Startup on events add update and delete the ebent*/
+        [HttpPost]
+        public JsonResult SaveEvent(Event e)
+        {
+            var status = false;
+            using (ApplicationDbContext  dc = new ApplicationDbContext())
+            {
+                if (e.Id > 0)
+                {
+                    //Update the event
+                    var v = dc.Events.Where(a => a.Id == e.Id).FirstOrDefault();
+                    if (v != null)
+                    {
+                        v.Title = e.Title;
+                        v.StartDate = e.StartDate;
+                        v.EndDate = e.EndDate;
+                        v.Description = e.Description;
+                        v.IsFull = e.IsFull;
+                        v.Color = e.Color;
+                    }
+                }
+                else
+                {
+                    dc.Events.Add(e);
+                }
+                dc.SaveChanges();
+                status = true;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpPost]
+        public JsonResult DeleteEvent(int eventID)
+        {
+            var status = false;
+            using (ApplicationDbContext dc = new ApplicationDbContext())
+            {
+                var v = dc.Events.Where(a => a.Id == eventID).FirstOrDefault();
+                if (v != null)
+                {
+                    dc.Events.Remove(v);
+                    dc.SaveChanges();
+                    status = true;
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+        /*end of events*/
 
         public ActionResult ViewGroupDetails(int? id)
         {

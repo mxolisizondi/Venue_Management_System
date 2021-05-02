@@ -34,6 +34,7 @@ namespace Venue_Management_System.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<BorrowHistory> BorrowHistories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

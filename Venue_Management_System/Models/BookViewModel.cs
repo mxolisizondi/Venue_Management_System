@@ -11,16 +11,16 @@ using System.Web.UI.WebControls;
 
 namespace Venue_Management_System.Models
 {
-    public class Book
+    public class BookViewModel
     {
-        public int Id { get; set; } //ISBN
-        public string Name { get; set; }
+        public int BookId { get; set; }
+
+        public string Title { get; set; }
+
         public string Author { get; set; }
-        public DateTime DatePublished { get; set; }
-        public int TotalBooks { get; set; }
-        public int TotalBooksAvailable { get; set; }
 
         public string Publisher { get; set; }
-        public ICollection<BorrowHistory> BorrowHistories { get; set; }
+
+        public bool IsAvailable { get; set; }
     }
 }
