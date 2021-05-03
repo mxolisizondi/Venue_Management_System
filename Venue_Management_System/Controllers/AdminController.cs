@@ -7,6 +7,7 @@ using Venue_Management_System.Models;
 using System.Data.Entity;
 using Venue_Management_System.ViewModels;
 using VenueStatus = Venue_Management_System.Enum.VenueStatus;
+using BookStatus = Venue_Management_System.Enum.BookStatus;
 
 namespace Venue_Management_System.Controllers
 {
@@ -120,7 +121,7 @@ namespace Venue_Management_System.Controllers
             }
             _context.Campuses.Add(campus);
             _context.SaveChanges();
-            return RedirectToAction("Venues"); // Toast Status succeful 
+            return RedirectToAction("Venues"); // Toast Status succeful
         }
 
         //public ActionResult UpdateVenue()
@@ -144,7 +145,7 @@ namespace Venue_Management_System.Controllers
                                              .Include(s => s.venueStatus)
                                              .SingleOrDefault(v => v.Id == id);
 
-            if (venue == null) 
+            if (venue == null)
                 return HttpNotFound();
 
 
