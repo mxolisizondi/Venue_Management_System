@@ -302,6 +302,10 @@
     <Compile Include="Migrations\202105031513313_AddGroupBookingModel.Designer.cs">
       <DependentUpon>202105031513313_AddGroupBookingModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105032117508_CheckUpdates.cs" />
+    <Compile Include="Migrations\202105032117508_CheckUpdates.Designer.cs">
+      <DependentUpon>202105032117508_CheckUpdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -743,6 +747,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105031513313_AddGroupBookingModel.resx">
       <DependentUpon>202105031513313_AddGroupBookingModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105032117508_CheckUpdates.resx">
+      <DependentUpon>202105032117508_CheckUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
