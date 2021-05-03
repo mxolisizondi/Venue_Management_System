@@ -9,6 +9,7 @@ using Venue_Management_System.Models;
 using Venue_Management_System.ViewModels;
 using VenueStatus = Venue_Management_System.Enum.VenueStatus;
 using BookStatus = Venue_Management_System.Enum.BookStatus;
+using BookVenueCategory = Venue_Management_System.Enum.BookVenueCategory;
 
 namespace Venue_Management_System.Controllers
 {
@@ -187,33 +188,73 @@ namespace Venue_Management_System.Controllers
             //List of group, Venue, User, Date
             var student = _context.Students.FirstOrDefault(s => s.UserId == userId);
             var ownerGroups = _context.Groups.Include(m => m.GroupMembers).Where(s => s.UserId == userId).ToList();
+            var categories = _context.BookVenueCategories.ToList();
+            var bookVenue = new BookVenue
+            {
+                UserId = userId,
+                VenueId = venueToBook.Id
+
+            };
             var veiwModel = new BookVenueViewModel
             {
                 Venue = venueToBook,
                 Student = student,
-                Groups = ownerGroups
+                Groups = ownerGroups,
+                BookVenue = bookVenue,
+                BookVenueCategories = categories
             };
+
             
             return View(veiwModel);
         }
+
+        //private List<BookVenueCategory> GetCategoryList()
+        //{
+        //    //Hard coded a list of items here, You may replace it with 
+        //    // Items from your db table
+        //    return new List<BookVenueCategory>
+        //    {
+        //        new BookVenueCategory {Id = 1, BookVenueType = "Individual"},
+        //        new BookVenueCategory {Id = 2, BookVenueType = "Group"}
+        //    };
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult BookSpace(BookVenueViewModel bookVenueViewModel)
         {
-
+            var userId = User.Identity.GetUserId();
+            
+            var selectedCategoty = bookVenueViewModel.SelectedCategory;
             if (!ModelState.IsValid)
             {
+                var student = _context.Students.FirstOrDefault(s => s.UserId == userId);
+                var ownerGroups = _context.Groups.Include(m => m.GroupMembers).Where(s => s.UserId == userId).ToList();
+                var categories = _context.BookVenueCategories.ToList();
+                bookVenueViewModel.Groups = ownerGroups;
+                bookVenueViewModel.BookVenueCategories = categories;
                 return View(bookVenueViewModel);
             }
 
-            var bookVenue = new BookVenue
-            {
-
-            };
+            var bookVenue = bookVenueViewModel.BookVenue;
+            bookVenue.bookVenueCategoryId = (byte)bookVenueViewModel.SelectedCategory;
+ 
             _context.BookVenues.Add(bookVenue);
             _context.SaveChanges();
-            return RedirectToAction("MyBorrowedBooks"); // Toast Status succeful changes and redirect to pending applications
+            var bookId = bookVenue.Id;
+
+            if (bookVenue.bookVenueCategoryId == BookVenueCategory.Group)
+            {
+                var groupBooking = new GroupBooking
+                {
+                    GroupId = bookVenueViewModel.GroupMembers.Id,
+                    bookVenueId =bookId
+                };
+                _context.GroupBookings.Add(groupBooking);
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("MyBookings"); // Toast Status succeful changes and redirect to pending applications
         }
 
         public ActionResult Books()
@@ -225,6 +266,11 @@ namespace Venue_Management_System.Controllers
         //Get venue to book
         public ActionResult BorrowBook(int id)
         {
+            var borroweBook = _context.BorrowedBooks.FirstOrDefault(b => b.BookId == id);
+
+            if (borroweBook != null)
+                return RedirectToAction("MyBorrowedBooks");
+
             var userId = User.Identity.GetUserId();
             var book = _context.Books.FirstOrDefault(b => b.Id == id);
 
@@ -248,15 +294,45 @@ namespace Venue_Management_System.Controllers
         public ActionResult BorrowBook(BorrowedBook borrowedBook)
         {
 
+            var bookToBorrow = _context.Books.First(b => b.Id == borrowedBook.BookId);
+
+            bookToBorrow.TotalBooksAvailable -= 1;
+
+            _context.SaveChanges();
+
             if (!ModelState.IsValid)
             {
                 return View(borrowedBook);
             }
-            borrowedBook.Book.TotalBooksAvailable = borrowedBook.Book.TotalBooksAvailable - 1; //Add context of Book to minus the book when user borrow
-            borrowedBook.DateReturned = borrowedBook.DueDate;
             _context.BorrowedBooks.Add(borrowedBook);
             _context.SaveChanges();
             return RedirectToAction("MyBorrowedBooks"); // Toast Status succeful changes and redirect to pending applications
+        }
+
+        public ActionResult MyBorrowedBooks()
+        {
+            var userId = User.Identity.GetUserId();
+            var bookedBooks = _context.BorrowedBooks.Include(b => b.Book).Where(u => u.UserId == userId).ToList();
+
+            return View(bookedBooks);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReturnBook(int id)
+        {
+            var bookToReturn = _context.BorrowedBooks.FirstOrDefault(b => b.BookId == id);
+
+            if (bookToReturn == null)
+                return RedirectToAction("MyBorrowedBooks"); //Toast to say you dont owe this book
+
+            _context.BorrowedBooks.Remove(bookToReturn);
+
+            var book = _context.Books.First(b => b.Id == bookToReturn.BookId);
+            book.TotalBooksAvailable += 1;
+            _context.SaveChanges();
+
+            return RedirectToAction("MyBorrowedBooks"); // Toast Status succeful returned book
         }
     }
 }

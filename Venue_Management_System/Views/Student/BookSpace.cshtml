@@ -7,32 +7,37 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.BookVenue.UserId)
+    @Html.HiddenFor(model => model.BookVenue.VenueId)
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
         <div class="form-group">
             <div class="col-md-10">
                 <div class="form-check form-switch">
-                   @Html.RadioButton("BookVenueCategory", "Individual", new { @class = "form-check-input" })
-                    <label class="form-check-label" for="customSwitch1">Individual </label>
+                    @foreach (var category in Model.BookVenueCategories)
+                    {
+                        <div> @Html.RadioButtonFor(c => c.SelectedCategory, category.Id, new { @class = "form-check-input" })</div>
+                        <label class="form-check-label" for="customSwitch1">@category.BookVenueType </label>
+                    }
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <div class="form-check form-switch">
-                    @Html.RadioButton("BookVenueCategory", "Group", new { @class = "form-check-input" })
-                    <label class="form-check-label" for="customSwitch1">Group </label>
+        @*<div class="form-group">
+                <div class="col-md-10">
+                    <div class="form-check form-switch">
+                        @Html.RadioButton("BookVenueCategory", "Group", new { @class = "form-check-input" })
+                        <label class="form-check-label" for="customSwitch1">Group </label>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>*@
         <div class="form-group" id="selectGroup">
             @Html.LabelFor(m => m.GroupMembers.Id, new { @class = "form-label" })
             <div class="col-md-10">
@@ -73,9 +78,9 @@
     <script>
         $(document).ready(function () {
             $('#selectGroup').hide();
-            $('input[name=BookVenueCategory]').click(function () {
-                console.log($('input[name=BookVenueCategory]:checked').val());
-                if ($('input[name=BookVenueCategory]:checked').val() === "Group") {
+            $('input[name=SelectedCategory]').click(function () {
+                console.log($('input[name=SelectedCategory]:checked').val());
+                if ($('input[name=SelectedCategory]:checked').val() === "2") {
                     $('#selectGroup').show();
                 } else {
                     $('#selectGroup').hide();

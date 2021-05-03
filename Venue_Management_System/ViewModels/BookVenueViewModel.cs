@@ -13,5 +13,7 @@ namespace Venue_Management_System.ViewModels
         public BookVenue BookVenue { get; set; }
         public GroupMember GroupMembers { get; set; }
         public IEnumerable<Group> Groups { get; set; }
+        public int? SelectedCategory { set; get; }
+        public List<BookVenueCategory> BookVenueCategories { get; set; }
     }
 }

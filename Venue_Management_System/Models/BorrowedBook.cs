@@ -17,7 +17,7 @@ namespace Venue_Management_System.Models
 
         public DateTime DateBorrowed { get; set; }
 
-        public DateTime DateReturned { get; set; }
+        public DateTime? DateReturned { get; set; }
 
         public DateTime DueDate { get; set; }
 

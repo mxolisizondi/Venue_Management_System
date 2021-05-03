@@ -16,5 +16,7 @@ namespace Venue_Management_System.Models
         
         public BookStatus BookStatus { get; set; }
         public byte BookStatusId { get; set; }
+
+        public IEnumerable<BorrowedBook> BorrowedBooks { get; set; }
     }
 }

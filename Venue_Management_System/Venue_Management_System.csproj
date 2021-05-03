@@ -174,6 +174,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Enum\BookStatus.cs" />
+    <Compile Include="Enum\BookVenueCategory.cs" />
     <Compile Include="Enum\VenueStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,6 +295,14 @@
     <Compile Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.Designer.cs">
       <DependentUpon>202105021443419_AddBookCategoryInBookVenueModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.cs" />
+    <Compile Include="Migrations\202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.Designer.cs">
+      <DependentUpon>202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105031513313_AddGroupBookingModel.cs" />
+    <Compile Include="Migrations\202105031513313_AddGroupBookingModel.Designer.cs">
+      <DependentUpon>202105031513313_AddGroupBookingModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -308,6 +317,7 @@
     <Compile Include="Models\DistinctItemComparer.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupBooking.cs" />
     <Compile Include="Models\GroupMember.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -697,6 +707,7 @@
     <Content Include="Views\Admin\ViewBook.cshtml" />
     <Content Include="Views\Student\Books.cshtml" />
     <Content Include="Views\Student\BorrowBook.cshtml" />
+    <Content Include="Views\Student\MyBorrowedBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -802,6 +813,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.resx">
       <DependentUpon>202105021443419_AddBookCategoryInBookVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.resx">
+      <DependentUpon>202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105031513313_AddGroupBookingModel.resx">
+      <DependentUpon>202105031513313_AddGroupBookingModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
