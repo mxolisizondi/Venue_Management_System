@@ -34,12 +34,8 @@
             @Html.DropDownListFor(m => m.Venue.CampusId, new SelectList(Model.Campuses, "Id", "Name"), "Select Campus", new { @class = "form-control" })
         </div>
         <div class="mb-3">
-            @Html.LabelFor(m => m.Venue.departmentId, new { @class = "form-label" })
-            @Html.DropDownListFor(m => m.Venue.departmentId, new SelectList(Model.Departments, "Id", "Name"), "Select department", new { @class = "form-control" })
-        </div>
-        <div class="mb-3">
             @Html.LabelFor(m => m.Venue.venueStatusId, new { @class = "form-label" })
-            @Html.DropDownListFor(m => m.Venue.venueStatusId, new SelectList(Model.VenueStatuses, "Id", "Status"), "Select status", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Venue.venueStatusId, new SelectList(Model.VenueStatuses, "Id", "Status"), "Select Campus", new { @class = "form-control" })
         </div>
         <div class="mb-3">
             <input type="submit" class="btn btn-danger mb-2" value=" Add Venue" />

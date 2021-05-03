@@ -86,7 +86,7 @@ namespace Venue_Management_System.Controllers
                         return RedirectToAction("Index", "Admin");
 
                     else if (userRole.Contains(RoleName.Student) && (returnUrl == null || returnUrl == "/"))
-                        return RedirectToAction("Index", "Student");
+                        return RedirectToAction("Home", "Student");
 
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -401,7 +401,7 @@ namespace Venue_Management_System.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         //

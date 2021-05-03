@@ -7,8 +7,6 @@ using Venue_Management_System.Models;
 using System.Data.Entity;
 using Venue_Management_System.ViewModels;
 using VenueStatus = Venue_Management_System.Enum.VenueStatus;
-using BookStatus = Venue_Management_System.Enum.BookStatus;
-using Venue_Management_System.Models.Syah_Models;
 
 namespace Venue_Management_System.Controllers
 {
@@ -56,13 +54,11 @@ namespace Venue_Management_System.Controllers
             var venueTypes = _context.venueTypes.ToList();
             var campuses = _context.Campuses.ToList();
             var venueStatuses = _context.VenueStatuses.ToList();
-            var departments = _context.Departments.ToList();
             var venueViewModel = new VenueViewModel
             {
                 VenueTypes = venueTypes,
                 Campuses = campuses,
-                VenueStatuses = venueStatuses,
-                Departments = departments
+                VenueStatuses = venueStatuses
 
             };
             return View(venueViewModel);
@@ -81,8 +77,7 @@ namespace Venue_Management_System.Controllers
                     Venue = venue,
                     VenueTypes = _context.venueTypes.ToList(),
                     Campuses = _context.Campuses.ToList(),
-                    VenueStatuses = _context.VenueStatuses.ToList(),
-                    Departments = _context.Departments.ToList()
+                    VenueStatuses = _context.VenueStatuses.ToList()
                 };
                 return View(viewModel);
             }
@@ -215,113 +210,5 @@ namespace Venue_Management_System.Controllers
             _context.SaveChanges();
             return RedirectToAction("Venues"); // Toast Status succeful
         }
-
-        // GET: Books/Get Active Books
-        public ActionResult GetAllBooks()
-        {
-            var books = _context.Books.Where(b => b.BookStatusId == BookStatus.Active).ToList();
-            return View(books);
-        }
-
-        // GET: Books/GetAllBooks
-        public ActionResult GetInActiveBooks()
-        {
-            var inActiveBooks = _context.Books.Where(b => b.BookStatusId == BookStatus.InActive).ToList();
-            return View(inActiveBooks);
-        }
-
-        // GET: Books/Create
-        public ActionResult CreateBook()
-        {
-            var veiwModel = new BookViewModel
-            {
-                BookStatuses = _context.BookStatuses.ToList()
-            };
-            return View(veiwModel);
-        }
-
-        // POST: Books/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateBook(Book book)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(book);
-            }
-
-            book.TotalBooksAvailable = book.TotalBooks;
-            _context.Books.Add(book);
-            _context.SaveChanges();
-
-            return RedirectToAction("GetAllBooks");
-        }
-
-        // GET: Books/Create
-        public ActionResult UpdateBook(int? id)
-        {
-            var book = _context.Books.FirstOrDefault(b => b.Id == id);
-
-            if (book == null)
-                return HttpNotFound();
-
-            var viewModel = new BookViewModel
-            {
-                Book = book,
-                BookStatuses = _context.BookStatuses.ToList()
-            };
-
-            return View(viewModel);
-        }
-
-        // POST: Books/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateBook(Book book)
-        {
-            var bookInDb = _context.Books.First(b => b.Id == book.Id);
-
-            bookInDb.Name = book.Name;
-            bookInDb.Author = book.Author;
-            bookInDb.DatePublished = book.DatePublished;
-            bookInDb.TotalBooks = book.TotalBooks;
-            bookInDb.BookStatusId = book.BookStatusId;
-            if (!ModelState.IsValid)
-            {
-                return View(book);
-            }
-            _context.SaveChanges(); // update succesful
-
-            return RedirectToAction("GetAllBooks");
-        }
-
-        // POST: Books/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteBook(int? id)
-        {
-            var bookInDb = _context.Books.First(b => b.Id == id);
-
-            bookInDb.BookStatusId = BookStatus.InActive;
-
-            _context.SaveChanges(); // update succesful
-
-            return RedirectToAction("GetAllBooks");
-        }
-
-        // GET: Books/Create
-        public ActionResult ViewBook(int? id)
-        {
-            var book = _context.Books.Include(s => s.BookStatus).FirstOrDefault(b => b.Id == id);
-
-            if (book == null)
-                return HttpNotFound();
-
-            return View(book);
-        }
-
     }
 }
