@@ -1,0 +1,50 @@
+﻿@model Venue_Management_System.Models.BorrowedBook
+@{
+    ViewBag.Title = "BorrowBook";
+    Layout = "~/Views/Shared/_StudentLayout_H.cshtml";
+}
+
+<h2>BorrowBook</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.BookId)
+    @Html.HiddenFor(model => model.UserId)
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Book.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Book.Name, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Book.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DateBorrowed, new { @class = "form-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateBorrowed, new { htmlAttributes = new { @class = "form-control", @id = "example-date", @name = "date", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.DateBorrowed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DueDate, new { @class = "form-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", @id = "example-date", @name = "date", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-danger" value=" Borrow Book" />
+            </div>
+        </div>
+    </div>
+}

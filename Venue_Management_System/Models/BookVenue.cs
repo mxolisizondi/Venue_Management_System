@@ -21,6 +21,10 @@ namespace Venue_Management_System.Models
 
         public DateTime LeavingTime { get; set; }
 
+        public BookVenueCategory BookVenueCategory { get; set; }
+
+        public byte bookVenueCategoryId { get; set; }
+
     }
     //book now
 }
