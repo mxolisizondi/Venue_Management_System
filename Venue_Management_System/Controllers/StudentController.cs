@@ -208,16 +208,6 @@ namespace Venue_Management_System.Controllers
             return View(veiwModel);
         }
 
-        //private List<BookVenueCategory> GetCategoryList()
-        //{
-        //    //Hard coded a list of items here, You may replace it with 
-        //    // Items from your db table
-        //    return new List<BookVenueCategory>
-        //    {
-        //        new BookVenueCategory {Id = 1, BookVenueType = "Individual"},
-        //        new BookVenueCategory {Id = 2, BookVenueType = "Group"}
-        //    };
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -255,6 +245,13 @@ namespace Venue_Management_System.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("MyBookings"); // Toast Status succeful changes and redirect to pending applications
+        }
+
+        public ActionResult MyBookings()
+        {
+            var myBookings = _context.BookVenues.Include(v => v.Venue).ToList();
+
+            return View();
         }
 
         public ActionResult Books()

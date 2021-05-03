@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Venue_Management_System.Models.Syah_Models;
 
 namespace Venue_Management_System.Models
 {
@@ -38,10 +37,6 @@ namespace Venue_Management_System.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Event> Events { get; set; }
-        //Sya Models
-        public DbSet<Book_Sya> Books_Sya { get; set; }
-        public DbSet<BorrowedStatus_Sya> BorrowedStatuses_Sya { get; set; }
-        public DbSet<BorrowHistory> BorrowHistories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

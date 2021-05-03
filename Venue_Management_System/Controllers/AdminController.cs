@@ -8,7 +8,6 @@ using System.Data.Entity;
 using Venue_Management_System.ViewModels;
 using VenueStatus = Venue_Management_System.Enum.VenueStatus;
 using BookStatus = Venue_Management_System.Enum.BookStatus;
-using Venue_Management_System.Models.Syah_Models;
 
 namespace Venue_Management_System.Controllers
 {
