@@ -22,10 +22,7 @@ namespace Venue_Management_System.Models
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<BookStatus> BookStatuses { get; set; }
-        public DbSet<BookVenueCategory> BookVenueCategories { get; set; }
         public DbSet<BookVenue> BookVenues { get; set; }
-        public DbSet<GroupBooking> GroupBookings { get; set; }
         public DbSet<BorrowedBook> BorrowedBooks { get; set; }
         public DbSet<BorrowedStatus> BorrowedStatuses { get; set; }
         public DbSet<Campus> Campuses { get; set; }

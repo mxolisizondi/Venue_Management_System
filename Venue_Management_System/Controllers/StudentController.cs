@@ -7,9 +7,6 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using Venue_Management_System.Models;
 using Venue_Management_System.ViewModels;
-using VenueStatus = Venue_Management_System.Enum.VenueStatus;
-using BookStatus = Venue_Management_System.Enum.BookStatus;
-using BookVenueCategory = Venue_Management_System.Enum.BookVenueCategory;
 
 namespace Venue_Management_System.Controllers
 {
@@ -35,17 +32,6 @@ namespace Venue_Management_System.Controllers
             var distinctMyGroupId = listOfMyGroupsId.Distinct(new DistinctItemComparer()).ToList();
             var onlyId = distinctMyGroupId.Where(s => s.UserId == userId).Select(g => g.GroupId).ToList();
             var myGroup = _context.Groups.Include(s => s.Student).Include(m => m.GroupMembers).Where(g => onlyId.Contains(g.Id)).ToList();
-
-            for (int i = 0; i < myGroup.Count; i++)
-            {
-
-                foreach (var member in myGroup[i].GroupMembers)
-                {
-                    var student = _context.Students.First(s => s.UserId == member.UserId);
-
-                    member.Student = student;
-                }
-            }
 
             return View(myGroup);
         }
@@ -148,7 +134,7 @@ namespace Venue_Management_System.Controllers
 
             for(int i = 0; i < myGroup.Count; i++)
             {
-                
+
                 foreach(var member in myGroup[i].GroupMembers)
                 {
                     var student = _context.Students.First(s => s.UserId == member.UserId);
@@ -156,7 +142,7 @@ namespace Venue_Management_System.Controllers
                     member.Student = student;
                 }
             }
-            
+
 
             return View(myGroup);
         }
@@ -204,7 +190,7 @@ namespace Venue_Management_System.Controllers
                 BookVenueCategories = categories
             };
 
-            
+
             return View(veiwModel);
         }
 
@@ -214,7 +200,7 @@ namespace Venue_Management_System.Controllers
         public ActionResult BookSpace(BookVenueViewModel bookVenueViewModel)
         {
             var userId = User.Identity.GetUserId();
-            
+
             var selectedCategoty = bookVenueViewModel.SelectedCategory;
             if (!ModelState.IsValid)
             {
@@ -228,7 +214,7 @@ namespace Venue_Management_System.Controllers
 
             var bookVenue = bookVenueViewModel.BookVenue;
             bookVenue.bookVenueCategoryId = (byte)bookVenueViewModel.SelectedCategory;
- 
+
             _context.BookVenues.Add(bookVenue);
             _context.SaveChanges();
             var bookId = bookVenue.Id;

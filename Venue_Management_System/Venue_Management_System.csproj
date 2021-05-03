@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Venue_Management_System</RootNamespace>
     <AssemblyName>Venue_Management_System</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,11 +54,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -172,8 +169,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Enum\BookStatus.cs" />
-    <Compile Include="Enum\BookVenueCategory.cs" />
     <Compile Include="Enum\VenueStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,57 +253,10 @@
     <Compile Include="Migrations\202104262048464_AddListToStudentModel.Designer.cs">
       <DependentUpon>202104262048464_AddListToStudentModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105011259427_AddSyaModels.cs" />
-    <Compile Include="Migrations\202105011259427_AddSyaModels.Designer.cs">
-      <DependentUpon>202105011259427_AddSyaModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105011547329_DropBookStatus.cs" />
-    <Compile Include="Migrations\202105011547329_DropBookStatus.Designer.cs">
-      <DependentUpon>202105011547329_DropBookStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105011552376_AddBookStatudModel.cs" />
-    <Compile Include="Migrations\202105011552376_AddBookStatudModel.Designer.cs">
-      <DependentUpon>202105011552376_AddBookStatudModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105011556334_PopulateBookStatus.cs" />
-    <Compile Include="Migrations\202105011556334_PopulateBookStatus.Designer.cs">
-      <DependentUpon>202105011556334_PopulateBookStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105012355370_AddBookIdToBorrowedBooks.cs" />
-    <Compile Include="Migrations\202105012355370_AddBookIdToBorrowedBooks.Designer.cs">
-      <DependentUpon>202105012355370_AddBookIdToBorrowedBooks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105020017219_RemoveBorrowedStatusOnModel.cs" />
-    <Compile Include="Migrations\202105020017219_RemoveBorrowedStatusOnModel.Designer.cs">
-      <DependentUpon>202105020017219_RemoveBorrowedStatusOnModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105021346235_AddDepartmentIDToVenueModel.cs" />
-    <Compile Include="Migrations\202105021346235_AddDepartmentIDToVenueModel.Designer.cs">
-      <DependentUpon>202105021346235_AddDepartmentIDToVenueModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105021406573_AddDepartmentIdToStudentModel.cs" />
-    <Compile Include="Migrations\202105021406573_AddDepartmentIdToStudentModel.Designer.cs">
-      <DependentUpon>202105021406573_AddDepartmentIdToStudentModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.cs" />
-    <Compile Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.Designer.cs">
-      <DependentUpon>202105021443419_AddBookCategoryInBookVenueModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.cs" />
-    <Compile Include="Migrations\202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.Designer.cs">
-      <DependentUpon>202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105031513313_AddGroupBookingModel.cs" />
-    <Compile Include="Migrations\202105031513313_AddGroupBookingModel.Designer.cs">
-      <DependentUpon>202105031513313_AddGroupBookingModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookCategory.cs" />
-    <Compile Include="Models\BookStatus.cs" />
     <Compile Include="Models\BookVenue.cs" />
-    <Compile Include="Models\BookVenueCategory.cs" />
     <Compile Include="Models\BorrowedBook.cs" />
     <Compile Include="Models\BorrowedStatus.cs" />
     <Compile Include="Models\Campus.cs" />
@@ -316,7 +264,6 @@
     <Compile Include="Models\DistinctItemComparer.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\GroupBooking.cs" />
     <Compile Include="Models\GroupMember.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -328,8 +275,6 @@
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\BookVenueViewModel.cs" />
-    <Compile Include="ViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\VenueViewModel.cs" />
   </ItemGroup>
@@ -498,6 +443,34 @@
     <Content Include="Admin_Assets\assets\js\vendor\responsive.bootstrap4.min.js" />
     <Content Include="Admin_Assets\assets\js\vendor\simplemde.min.js" />
     <Content Include="Admin_Assets\assets\js\vendor\typeahead.bundle.min.js" />
+    <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\flex-slider.css" />
+    <Content Include="Content\assets\css\font-awesome.css" />
+    <Content Include="Content\assets\css\templatemo-softy-pinko.css" />
+    <Content Include="Content\assets\fonts\flexslider-icon.svg" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\assets\fonts\slick.svg" />
+    <Content Include="Content\assets\images\banner-bg.png" />
+    <Content Include="Content\assets\images\blog-item-01.png" />
+    <Content Include="Content\assets\images\blog-item-02.png" />
+    <Content Include="Content\assets\images\blog-item-03.png" />
+    <Content Include="Content\assets\images\circle-dec.png" />
+    <Content Include="Content\assets\images\featured-item-01.png" />
+    <Content Include="Content\assets\images\fun-facts-bg.png" />
+    <Content Include="Content\assets\images\left-image.png" />
+    <Content Include="Content\assets\images\logo.png" />
+    <Content Include="Content\assets\images\right-image.png" />
+    <Content Include="Content\assets\images\testimonial-icon.png" />
+    <Content Include="Content\assets\images\work-process-bg.png" />
+    <Content Include="Content\assets\images\work-process-item-01.png" />
+    <Content Include="Content\assets\js\bootstrap.min.js" />
+    <Content Include="Content\assets\js\custom.js" />
+    <Content Include="Content\assets\js\imgfix.min.js" />
+    <Content Include="Content\assets\js\jquery-2.1.0.min.js" />
+    <Content Include="Content\assets\js\jquery.counterup.min.js" />
+    <Content Include="Content\assets\js\popper.js" />
+    <Content Include="Content\assets\js\scrollreveal.min.js" />
+    <Content Include="Content\assets\js\waypoints.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -553,6 +526,18 @@
     <Content Include="Admin_Assets\assets\images\report.svg" />
     <Content Include="Admin_Assets\assets\images\startman.svg" />
     <Content Include="Admin_Assets\assets\images\startup.svg" />
+    <Content Include="Content\assets\fonts\Flaticon.woff" />
+    <Content Include="Content\assets\fonts\flexslider-icon.eot" />
+    <Content Include="Content\assets\fonts\flexslider-icon.ttf" />
+    <Content Include="Content\assets\fonts\flexslider-icon.woff" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\assets\fonts\FontAwesome.otf" />
+    <Content Include="Content\assets\fonts\slick.eot" />
+    <Content Include="Content\assets\fonts\slick.ttf" />
+    <Content Include="Content\assets\fonts\slick.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -710,39 +695,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104262048464_AddListToStudentModel.resx">
       <DependentUpon>202104262048464_AddListToStudentModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105011259427_AddSyaModels.resx">
-      <DependentUpon>202105011259427_AddSyaModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105011547329_DropBookStatus.resx">
-      <DependentUpon>202105011547329_DropBookStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105011552376_AddBookStatudModel.resx">
-      <DependentUpon>202105011552376_AddBookStatudModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105011556334_PopulateBookStatus.resx">
-      <DependentUpon>202105011556334_PopulateBookStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105012355370_AddBookIdToBorrowedBooks.resx">
-      <DependentUpon>202105012355370_AddBookIdToBorrowedBooks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105020017219_RemoveBorrowedStatusOnModel.resx">
-      <DependentUpon>202105020017219_RemoveBorrowedStatusOnModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105021346235_AddDepartmentIDToVenueModel.resx">
-      <DependentUpon>202105021346235_AddDepartmentIDToVenueModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105021406573_AddDepartmentIdToStudentModel.resx">
-      <DependentUpon>202105021406573_AddDepartmentIdToStudentModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105021443419_AddBookCategoryInBookVenueModel.resx">
-      <DependentUpon>202105021443419_AddBookCategoryInBookVenueModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.resx">
-      <DependentUpon>202105031003404_MakeDateReturnedNullableOnBookBorrowedModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105031513313_AddGroupBookingModel.resx">
-      <DependentUpon>202105031513313_AddGroupBookingModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
