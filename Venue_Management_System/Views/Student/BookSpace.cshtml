@@ -41,7 +41,7 @@
         <div class="form-group" id="selectGroup">
             @Html.LabelFor(m => m.GroupMembers.Id, new { @class = "form-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.GroupMembers.Id, new SelectList(Model.Groups, "Id", "Name"), "Select Group", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.GroupMembers.Id, new SelectList(Model.Groups, "Id", "Name"), "Select Group", new { @class = "form-control", id ="groupMemberId" })
             </div>
         </div>
         <div class="form-group">
@@ -85,6 +85,10 @@
                 } else {
                     $('#selectGroup').hide();
                 }
+                if ($('input[name=SelectedCategory]:checked').val() === "1") {
+                    $('#groupMemberId').val(0);
+                }
+
             });
         });
     </script>

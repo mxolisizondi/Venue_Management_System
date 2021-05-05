@@ -10,6 +10,9 @@ using Venue_Management_System.ViewModels;
 using VenueStatus = Venue_Management_System.Enum.VenueStatus;
 using BookStatus = Venue_Management_System.Enum.BookStatus;
 using BookVenueCategory = Venue_Management_System.Enum.BookVenueCategory;
+using CovidStatus = Venue_Management_System.Enum.CovidStatus;
+using System.IO;
+using System.Net.Mail;
 
 namespace Venue_Management_System.Controllers
 {
@@ -136,8 +139,8 @@ namespace Venue_Management_System.Controllers
 
         public JsonResult GetEvents()
         {
-            var events = _context.Events.ToList();
-            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var myBookings = _context.BookVenues.Include(v => v.Venue).Include(c => c.BookVenueCategory).ToList();
+            return new JsonResult { Data = myBookings, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         public ActionResult ViewGroupDetails(int? id)
@@ -249,9 +252,108 @@ namespace Venue_Management_System.Controllers
 
         public ActionResult MyBookings()
         {
-            var myBookings = _context.BookVenues.Include(v => v.Venue).ToList();
+            var userId = User.Identity.GetUserId();
+            var todayDate = DateTime.Today;
+            var time = DateTime.Now.TimeOfDay;
 
-            return View();
+            
+
+            var myBookings = _context.BookVenues.Include(v => v.Venue)
+                                                .Include(c => c.BookVenueCategory)
+                                                .Where(u => u.UserId == userId &&
+                                                       u.BookingDate >= todayDate)
+                                                .ToList();
+
+            List<BookVenue> activeBookings = new List<BookVenue>();
+
+            foreach (var bookvenue in myBookings)
+            {
+                if(bookvenue.LeavingTime.TimeOfDay > time || bookvenue.BookingDate > todayDate)
+                {
+                    activeBookings.Add(bookvenue);
+                }
+            }
+            return View(activeBookings);
+        }
+
+        public ActionResult Reschedule(int? id)
+        {
+            var venueToReschedule = _context.BookVenues.FirstOrDefault(v => v.Id == id);
+            //var userId = User.Identity.GetUserId();
+            //check if the lab is active and have available space
+
+            if (venueToReschedule == null)
+                return HttpNotFound();
+
+
+            return View(venueToReschedule);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reschedule(BookVenue bookVenue)
+        {
+            var bookVenueInDB = _context.BookVenues.FirstOrDefault(b => b.Id == bookVenue.Id);
+
+            if (bookVenueInDB == null)
+                return HttpNotFound();
+
+            bookVenueInDB.BookingDate = bookVenue.BookingDate;
+            bookVenueInDB.LeavingTime = bookVenue.LeavingTime;
+            bookVenueInDB.StartingTime = bookVenue.StartingTime;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("MyBookings"); // Toast Status succeful changes and redirect to pending applications
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelBooking(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var todayDate = DateTime.Today;
+            var time = DateTime.Now.TimeOfDay;
+
+            var myBooking = _context.BookVenues.FirstOrDefault(u => u.UserId == userId && u.BookingDate >= todayDate && u.Id == id);
+
+            if (myBooking == null)
+                return HttpNotFound();
+
+            if (myBooking.LeavingTime.TimeOfDay > time)
+            {
+                _context.BookVenues.Remove(myBooking);
+                _context.SaveChanges();
+                //Toast booking canceled successful
+                return RedirectToAction("MyBookings");
+            }
+            //Toast Not able to Remove
+            return RedirectToAction("MyBookings");
+        }
+
+        public ActionResult MyHistoryBookings()
+        {
+            var userId = User.Identity.GetUserId();
+            var todayDate = DateTime.Today;
+            var time = DateTime.Now.TimeOfDay;
+
+
+
+            var myHistoryBookings = _context.BookVenues.Include(v => v.Venue)
+                                                .Include(c => c.BookVenueCategory)
+                                                .Where(u => u.UserId == userId &&
+                                                       u.BookingDate < todayDate)
+                                                .ToList();
+
+            //List<BookVenue> activeBookings = new List<BookVenue>();
+
+            //foreach (var bookvenue in myBookings)
+            //{
+            //    if (bookvenue.LeavingTime.TimeOfDay > time)
+            //    {
+            //        activeBookings.Add(bookvenue);
+            //    }
+            //}
+            return View(myHistoryBookings);
         }
 
         public ActionResult Books()
@@ -330,6 +432,232 @@ namespace Venue_Management_System.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("MyBorrowedBooks"); // Toast Status succeful returned book
+        }
+
+        public ActionResult ReportCovidCase()
+        {
+            var userId = User.Identity.GetUserId();
+            var covidStatuses = _context.CovidStatuses.ToList();
+            var student = _context.Students.First(u => u.UserId == userId);
+
+            var reportCase = new ReportCase
+            {
+                Student = student,
+                UserId = userId
+            };
+
+            var reportCaseViewModel = new ReportCaseViewModel
+            {
+                ReportCase = reportCase,
+                CovidStatuses = covidStatuses
+            };
+
+            return View(reportCaseViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReportCovidCase(ReportCase reportCase)
+        {
+            List<CovidDocument> covidDocuments = new List<CovidDocument>();
+
+            _context.ReportCases.Add(reportCase);
+            _context.SaveChanges();
+
+
+            var reportCaseId = reportCase.Id;
+            //upload files
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                var file = Request.Files[i];
+                byte[] bytes;
+                BinaryReader br = new BinaryReader(file.InputStream);
+
+                bytes = br.ReadBytes(file.ContentLength);
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileData = new CovidDocument
+                    {
+                        FileName = Path.GetFileName(file.FileName),
+                        ContentType = file.ContentType,
+                        Data = bytes,
+                        UserId = reportCase.UserId,
+                        reportCaseId = reportCaseId
+
+                    };
+                    covidDocuments.Add(fileData);
+                }
+
+            }
+            foreach (var file in covidDocuments)
+            {
+                file.reportCaseId = reportCaseId;
+                _context.CovidDocuments.Add(file);
+                _context.SaveChanges();
+            }
+            DeActivateVenue(reportCaseId, covidDocuments);
+            return RedirectToAction("MyReportedCases"); // Toast Status succeful returned book
+        }
+
+        private void DeActivateVenue(int reportCaseId, List<CovidDocument> covidDocuments)
+        {
+            //SendEmailToAdmin About this case
+            NotifyAdminAboutPositiveCase(reportCaseId, covidDocuments);
+
+            //DeActivate Labs
+            //var studentTestedPosite = _context.ReportCases.Include(s => s.Student).Include(c => c.CovidStatus).First(u => u.Id == reportCaseId);
+            //if(studentTestedPosite.covidStatusId == CovidStatus.Positive)
+            //{
+            //    var bookingIds = _context.BookVenues.Where(u => u.UserId == studentTestedPosite.UserId).ToList();
+            //    DateTime foteenDaysBack = studentTestedPosite.TestDate.AddDays(-14);
+            //    foreach (var bookingId in bookingIds)
+            //    {
+            //        if(bookingId.BookingDate <= studentTestedPosite.TestDate && bookingId.BookingDate >= foteenDaysBack)
+            //        {
+            //            var venueToDeActivate = _context.Venues.First(v => v.Id == bookingId.VenueId);
+            //            venueToDeActivate.venueStatusId = VenueStatus.InActive;
+            //        }
+            //        _context.SaveChanges();
+
+            //    }
+
+            //}
+            
+
+
+
+
+
+            //CancelAllPendingBookings(reportCaseId);
+
+            //Notify all prevous contacts
+           NotifyAllPrevousContact(reportCaseId);
+        }
+
+        private void NotifyAdminAboutPositiveCase(int reportCaseId, List<CovidDocument> covidDocuments)
+        {
+            var userId = User.Identity.GetUserId();
+            var studentTestedPosite = _context.ReportCases.Include(s => s.Student).Include(c => c.CovidStatus).First(u => u.Id == reportCaseId);
+            if (studentTestedPosite.covidStatusId == CovidStatus.Positive)
+            {
+                DateTime foteenDaysBack = studentTestedPosite.TestDate.AddDays(-14);
+                var listOfVenueId = _context.BookVenues.Where(u => u.UserId == userId && u.BookingDate > foteenDaysBack &&
+                                                                                 u.BookingDate <= studentTestedPosite.TestDate)
+                                                                                  .ToList();
+                var distinctVenueId = listOfVenueId.Distinct(new DistinctIVenueComparer()).ToList();
+                var onlyVenueId = distinctVenueId.Where(u => u.UserId == userId).Select(v => v.VenueId).ToList();
+
+                var venuesUsed = _context.Venues.Where(v => onlyVenueId.Contains(v.Id)).ToList();
+
+                var listOfVenues = "";
+                foreach (var venue in venuesUsed)
+                {
+                    listOfVenues += venue.Name + ", ";
+                }
+                MemoryStream ms = new MemoryStream(covidDocuments[0].Data);
+                var adminEmails = "siyamkhize19@gmail.com,mxolisizondi20@outlook.com";
+                MailMessage mail = new MailMessage("mxolisizondi20@outlook.com", adminEmails);
+                mail.Subject = "NEW COVID 19 CASE AT DUT";
+                mail.Body = "Dear Admin\nWe would like to notify you that they is a student that might have tested positive for covid 19\n" +
+                    "Please check close contact on the system also notify cleaners to fumigate the venue\n. These are the venues we believe might be contaminated " + listOfVenues +
+                    "Thank You\n" +
+                    "Regards Venue Management System.";
+                //mail.Attachments.Add(covidDocuments.);
+                mail.Attachments.Add(new Attachment(ms, covidDocuments[0].FileName, covidDocuments[0].ContentType));
+                SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587);
+
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential()
+                {
+                    UserName = "mxolisizondi20@outlook.com",
+                    Password = "Mxolisi@1998"
+                };
+                client.EnableSsl = true;
+                {
+                    //client.Send(mail);
+                }
+
+                CancelAllPendingBookings(reportCaseId);
+            }
+
+            return;
+        }
+
+        private void CancelAllPendingBookings(int reportCaseId)
+        {
+            //SendEmailToAdmin About this case
+            var userId = User.Identity.GetUserId();
+            var studentTestedPosite = _context.ReportCases.Include(s => s.Student).Include(c => c.CovidStatus).First(u => u.Id == reportCaseId);
+            DateTime foteenDaysBack = studentTestedPosite.TestDate.AddDays(-14);
+           
+
+
+            var activeBookings = _context.BookVenues.Include(v => v.Venue)
+                                                .Include(c => c.BookVenueCategory)
+                                                .Where(u => u.BookingDate >=studentTestedPosite.TestDate)
+                                                .ToList();
+
+
+            _context.BookVenues.RemoveRange(activeBookings);
+            _context.SaveChanges();
+
+        }
+
+        private void NotifyAllPrevousContact(int reportCaseId)
+        {
+            //SendEmailToAdmin About this case
+            var userId = User.Identity.GetUserId();
+            var studentTestedPosite = _context.ReportCases.Include(s => s.Student).Include(c => c.CovidStatus).First(u => u.Id == reportCaseId);
+            DateTime foteenDaysBack = studentTestedPosite.TestDate.AddDays(-14);
+
+
+
+            var myHistoryBookings = _context.BookVenues.Include(v => v.Venue)
+                                    .Include(c => c.BookVenueCategory)
+                                    .Include(u => u.Student)
+                                    .Where(u => u.BookingDate < studentTestedPosite.TestDate && u.BookingDate > foteenDaysBack)
+                                    .ToList();
+
+            var listOfVenueId = _context.BookVenues.Where(u => u.UserId == userId && u.BookingDate > foteenDaysBack &&
+                                                                                 u.BookingDate <= studentTestedPosite.TestDate)
+                                                                                  .ToList();
+            var distinctStudentId = myHistoryBookings.Distinct(new DistinctIVenueComparer()).ToList();
+            var onlyStudentId = distinctStudentId.Where(u => u.BookingDate < studentTestedPosite.TestDate && u.BookingDate > foteenDaysBack)
+                                                 .Select(v => v.Student.Email).ToList();
+      
+
+            var studentIds = _context.Students.Where(u => onlyStudentId.Contains(u.Email)).ToList();
+
+            var ListsOfStudentsToNotify = "";
+            foreach(var email in studentIds)
+            {
+                ListsOfStudentsToNotify += email.Email + ",";
+            }
+            ListsOfStudentsToNotify = ListsOfStudentsToNotify.Substring(0, ListsOfStudentsToNotify.Length - 1);
+            //SendEmail To All Usersmax(Status)
+            MailMessage mail = new MailMessage("mxolisizondi20@outlook.com", ListsOfStudentsToNotify);
+            mail.Subject = "NEW COVID 19 CASE AT DUT";
+            mail.Body = "Dear Student,\n\nWe would like to notify you that they is a student that might have tested positive for covid 19\n\n" +
+                "Please check close contact on the system also notify cleaners to fumigate the venue\n. These are the venues we believe might be contaminated \n\n"+""+ 
+                "Thank You\n" +
+                "Regards Venue Management System.";
+            //mail.Attachments.Add(covidDocuments.);
+            SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587);
+
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential()
+            {
+                UserName = "mxolisizondi20@outlook.com",
+                Password = "Mxolisi@1998"
+            };
+            client.EnableSsl = true;
+            {
+                client.Send(mail);
+            }
+            return;
         }
     }
 }

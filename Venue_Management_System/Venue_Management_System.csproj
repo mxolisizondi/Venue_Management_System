@@ -174,6 +174,7 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Enum\BookStatus.cs" />
     <Compile Include="Enum\BookVenueCategory.cs" />
+    <Compile Include="Enum\CovidStatus.cs" />
     <Compile Include="Enum\VenueStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -306,6 +307,34 @@
     <Compile Include="Migrations\202105032117508_CheckUpdates.Designer.cs">
       <DependentUpon>202105032117508_CheckUpdates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105042011326_AddDataAnotationsOnTheBookVenueModel.cs" />
+    <Compile Include="Migrations\202105042011326_AddDataAnotationsOnTheBookVenueModel.Designer.cs">
+      <DependentUpon>202105042011326_AddDataAnotationsOnTheBookVenueModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105042045253_MakeTimeStringInBookingVenue.cs" />
+    <Compile Include="Migrations\202105042045253_MakeTimeStringInBookingVenue.Designer.cs">
+      <DependentUpon>202105042045253_MakeTimeStringInBookingVenue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105042125105_ChangingDateToStringInBookVenueModel.cs" />
+    <Compile Include="Migrations\202105042125105_ChangingDateToStringInBookVenueModel.Designer.cs">
+      <DependentUpon>202105042125105_ChangingDateToStringInBookVenueModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105042138074_ChangingDateBackToStringInBookVenueModel.cs" />
+    <Compile Include="Migrations\202105042138074_ChangingDateBackToStringInBookVenueModel.Designer.cs">
+      <DependentUpon>202105042138074_ChangingDateBackToStringInBookVenueModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105042207586_ChangingLeavingAndStartingTimeBackToDateAndTimeDataType.cs" />
+    <Compile Include="Migrations\202105042207586_ChangingLeavingAndStartingTimeBackToDateAndTimeDataType.Designer.cs">
+      <DependentUpon>202105042207586_ChangingLeavingAndStartingTimeBackToDateAndTimeDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105050028225_AddCodivModels.cs" />
+    <Compile Include="Migrations\202105050028225_AddCodivModels.Designer.cs">
+      <DependentUpon>202105050028225_AddCodivModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105050121577_PopulateCovidStatus.cs" />
+    <Compile Include="Migrations\202105050121577_PopulateCovidStatus.Designer.cs">
+      <DependentUpon>202105050121577_PopulateCovidStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -316,6 +345,8 @@
     <Compile Include="Models\BorrowedBook.cs" />
     <Compile Include="Models\BorrowedStatus.cs" />
     <Compile Include="Models\Campus.cs" />
+    <Compile Include="Models\CovidDocument.cs" />
+    <Compile Include="Models\CovidStatus.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\DistinctItemComparer.cs" />
     <Compile Include="Models\Event.cs" />
@@ -324,6 +355,7 @@
     <Compile Include="Models\GroupMember.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ReportCase.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Student.cs" />
@@ -335,12 +367,15 @@
     <Compile Include="ViewModels\BookVenueViewModel.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
+    <Compile Include="ViewModels\ReportCaseViewModel.cs" />
     <Compile Include="ViewModels\VenueViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin_Assets\assets\css\app-dark.min.css" />
     <Content Include="Admin_Assets\assets\css\app.min.css" />
     <Content Include="Admin_Assets\assets\css\icons.min.css" />
+    <Content Include="Admin_Assets\assets\css\toastr.css" />
+    <Content Include="Admin_Assets\assets\css\toastr.min.css" />
     <Content Include="Admin_Assets\assets\css\vendor\britecharts.min.css" />
     <Content Include="Admin_Assets\assets\css\vendor\buttons.bootstrap4.css" />
     <Content Include="Admin_Assets\assets\css\vendor\dataTables.bootstrap4.css" />
@@ -455,6 +490,8 @@
     <Content Include="Admin_Assets\assets\js\pages\demo.typehead.js" />
     <Content Include="Admin_Assets\assets\js\pages\demo.vector-maps.js" />
     <Content Include="Admin_Assets\assets\js\pages\demo.widgets.js" />
+    <Content Include="Admin_Assets\assets\js\toastr.js" />
+    <Content Include="Admin_Assets\assets\js\toastr.min.js" />
     <Content Include="Admin_Assets\assets\js\ui\component.chat.js" />
     <Content Include="Admin_Assets\assets\js\ui\component.dragula.js" />
     <Content Include="Admin_Assets\assets\js\ui\component.fileupload.js" />
@@ -506,6 +543,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -557,6 +596,10 @@
     <Content Include="Admin_Assets\assets\images\report.svg" />
     <Content Include="Admin_Assets\assets\images\startman.svg" />
     <Content Include="Admin_Assets\assets\images\startup.svg" />
+    <Content Include="Admin_Assets\assets\css\toastr.less" />
+    <Content Include="Admin_Assets\assets\css\toastr.scss" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -568,6 +611,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -636,6 +681,9 @@
     <Content Include="Views\Student\BorrowBook.cshtml" />
     <Content Include="Views\Student\MyBorrowedBooks.cshtml" />
     <Content Include="Views\Student\MyBookings.cshtml" />
+    <Content Include="Views\Student\Reschedule.cshtml" />
+    <Content Include="Views\Student\MyHistoryBookings.cshtml" />
+    <Content Include="Views\Student\ReportCovidCase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -750,6 +798,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105032117508_CheckUpdates.resx">
       <DependentUpon>202105032117508_CheckUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105042011326_AddDataAnotationsOnTheBookVenueModel.resx">
+      <DependentUpon>202105042011326_AddDataAnotationsOnTheBookVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105042045253_MakeTimeStringInBookingVenue.resx">
+      <DependentUpon>202105042045253_MakeTimeStringInBookingVenue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105042125105_ChangingDateToStringInBookVenueModel.resx">
+      <DependentUpon>202105042125105_ChangingDateToStringInBookVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105042138074_ChangingDateBackToStringInBookVenueModel.resx">
+      <DependentUpon>202105042138074_ChangingDateBackToStringInBookVenueModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105042207586_ChangingLeavingAndStartingTimeBackToDateAndTimeDataType.resx">
+      <DependentUpon>202105042207586_ChangingLeavingAndStartingTimeBackToDateAndTimeDataType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105050028225_AddCodivModels.resx">
+      <DependentUpon>202105050028225_AddCodivModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105050121577_PopulateCovidStatus.resx">
+      <DependentUpon>202105050121577_PopulateCovidStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

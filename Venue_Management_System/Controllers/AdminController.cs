@@ -50,8 +50,11 @@ namespace Venue_Management_System.Controllers
             return View(venues);
         }
 
-        public ActionResult AddVenue()
+        public ActionResult AddVenue(string message)
         {
+            if (!string.IsNullOrEmpty(message))
+                ViewBag.message = message;
+
             var venueTypes = _context.venueTypes.ToList();
             var campuses = _context.Campuses.ToList();
             var venueStatuses = _context.VenueStatuses.ToList();
@@ -88,7 +91,7 @@ namespace Venue_Management_System.Controllers
             venue.NumberOfSitsAvailable = venue.NumberOfSitsAllowed;
             _context.Venues.Add(venue);
             _context.SaveChanges();
-            return RedirectToAction("AddVenue"); // Toast Status succeful changes and redirect to pending applications
+            return RedirectToAction("AddVenue", new { message = "Added" }); // Toast Status succeful changes and redirect to pending applications
         }
 
         public ActionResult AddVenueType()

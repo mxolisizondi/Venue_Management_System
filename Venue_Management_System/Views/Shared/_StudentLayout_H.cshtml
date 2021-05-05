@@ -416,7 +416,8 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="topnav-components">
                                             <a href="@Url.Action("BookVenue","Student")" class="dropdown-item">Book Venue</a>
-                                            <a href="widgets.html" class="dropdown-item">Widgets</a>
+                                            <a href="@Url.Action("MyBookings","Student")" class="dropdown-item">Active Bookings</a>
+                                            <a href="@Url.Action("MyHistoryBookings","Student")" class="dropdown-item">My Prevous Bookings</a>
                                             <a href="widgets.html" class="dropdown-item">Widgets</a>
 
                                         </div>
@@ -424,12 +425,12 @@
 
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-layouts" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="uil-window me-1"></i>Layouts <div class="arrow-down"></div>
+                                            <i class="uil-window me-1"></i>Covid19 Status <div class="arrow-down"></div>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="topnav-layouts">
-                                            <a href="index.html" class="dropdown-item">Vertical</a>
-                                            <a href="layouts-detached.html" class="dropdown-item">Detached</a>
-                                            <a href="layouts-horizontal.html" class="dropdown-item">Horizontal</a>
+                                            <a href="index.html" class="dropdown-item">Self Check</a>
+                                            <a href="@Url.Action("ReportCovidCase","Student")" class="dropdown-item">Report Case</a>
+                                            <a href="layouts-horizontal.html" class="dropdown-item">Check Active Cases</a>
                                         </div>
                                     </li>
                                 </ul>

@@ -37,6 +37,9 @@ namespace Venue_Management_System.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<ReportCase> ReportCases { get; set; }
+        public DbSet<CovidStatus> CovidStatuses { get; set; }
+        public DbSet<CovidDocument> CovidDocuments { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

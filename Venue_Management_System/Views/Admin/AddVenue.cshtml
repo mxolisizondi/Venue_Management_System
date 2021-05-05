@@ -47,6 +47,17 @@
     </div>
 }
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+<script>
+    $(document).ready(function () {
+    }
+    );
+    if ('@ViewBag.message' == "Added")
+        $.NotificationApp.send("Heads up!", "Venue added successful.", "top-right", "rgba(0,0,0,0.2)", "success")
+    else if ('@ViewBag.message' == "NotAdded")
+        $.NotificationApp.send("Oops!", "Venue was not added.", "top-right", "rgba(0,0,0,0.2)", "error")
+    
+
+</script>
+    }

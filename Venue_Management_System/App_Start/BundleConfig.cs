@@ -10,6 +10,7 @@ namespace Venue_Management_System
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/toastr.js",
                         "~/Admin_Assets/assets/js/app.min.js"));
 
  
@@ -39,6 +40,7 @@ namespace Venue_Management_System
             bundles.Add(new StyleBundle("~/Admin_Assets/assets/css").Include(
                       "~/Admin_Assets/assets/css/vendor/jquery-jvectormap-1.2.2.css",
                       "~/Admin_Assets/assets/css/icons.min.css",
+                      "~/Content/toastr.css",
                       "~/Admin_Assets/assets/css/app.min.css"));
             //I removed darkmode css
         }

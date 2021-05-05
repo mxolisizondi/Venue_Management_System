@@ -19,4 +19,19 @@ namespace Venue_Management_System.Models
                    obj.UserId.GetHashCode();
         }
     }
+
+    public class DistinctIVenueComparer : IEqualityComparer<BookVenue>
+    {
+        public bool Equals(BookVenue x, BookVenue y)
+        {
+            return x.VenueId == y.VenueId &&
+                  x.UserId == y.UserId;
+        }
+
+        public int GetHashCode(BookVenue obj)
+        {
+            return obj.VenueId.GetHashCode() ^
+                   obj.UserId.GetHashCode();
+        }
+    }
 }
